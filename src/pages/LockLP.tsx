@@ -20,7 +20,7 @@ function LockLP() {
     },
   ];
   return (
-    <div className="  ">
+    <div className="md:w-[80%] m-auto  ">
       <LPLockMenu available_pairs={available_tokens} />
     </div>
   );

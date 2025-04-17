@@ -39,8 +39,15 @@ function verifyBalance(
 ) {}
 ///
 
-// Calculate voting power based on amount and lock time:
+export async function getBalance(
+  token_address: string,
+  wallet_address: string
+) {}
 
+///
+
+// Calculate voting power based on amount and lock time:
+//the balanceOf read function also give us the voting power
 export async function calculateVotingPower(
   amount: BigInteger,
   UnlockTime: BigInteger
