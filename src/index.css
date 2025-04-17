@@ -1,0 +1,8 @@
+/* ✅ Tailwind v4+ syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: rgb(9 9 9);
+}
