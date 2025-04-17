@@ -1,10 +1,6 @@
 import { Slider } from "@mui/material";
-import { useState } from "react";
 import LockSwapFooter from "./LockSwapFooter";
-import { calculateVotingPower } from "../../../contract_interactions/contract-reads";
-function LockSwapper({ pair, set, value }: any) {
-  const [lockTime, setLockTime] = useState(1);
-
+function LockSwapper({ pair, set, setAmount, value }: any) {
   const handleSliderChange = (event: Event, newValue: number) => {
     set(newValue);
   };
@@ -34,6 +30,9 @@ function LockSwapper({ pair, set, value }: any) {
                   direction: "rtl",
                   textAlign: "right",
                   outline: "none",
+                }}
+                onChange={(e) => {
+                  setAmount(e.target.value);
                 }}
               />
             </div>

@@ -1,6 +1,9 @@
 import { readContract } from "viem/actions";
+import { writeContract } from "viem/actions";
 import { client } from "../config/viem_config";
 import { lotto_abi } from "../config/lotto_abi";
+import { contracts } from "./contracts/contracts";
+import { ve69_ABI } from "../config/ve69-ABI";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
 const jackpot_manager_ca = "";
 
@@ -42,6 +45,14 @@ export async function calculateVotingPower(
   amount: BigInteger,
   UnlockTime: BigInteger
 ) {
+  const voting_power: any = client.readContract({
+    address: contracts.Ve69LP,
+    abi: ve69_ABI,
+    functionName: "calculateVotingPower",
+  });
+
+  console.log(voting_power);
+
   return null;
 }
 
