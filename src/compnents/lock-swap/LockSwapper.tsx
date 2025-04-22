@@ -9,7 +9,6 @@ function LockSwapper({
   setAmount,
   amount,
   lockTime,
-  setVotingPower,
   votingPower,
 }: any) {
   const handleSliderChange = async (event: Event, newValue: number) => {

@@ -4,6 +4,7 @@ import { client } from "../config/viem_config.ts";
 import { lotto_abi } from "../config/lotto_abi";
 import { contracts } from "./contracts/contracts";
 import { ve69_ABI } from "../config/ve69-ABI";
+import { LPTokenABI } from "../config/LPTokenABI.ts";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
 const jackpot_manager_ca = "";
 
@@ -39,6 +40,20 @@ function verifyBalance(
 ) {}
 ///
 
+export async function verifyApproval(owner: string, spender: string) {
+  const allowance: any = await client.readContract({
+    address: contracts.lpToken,
+    args: [owner, spender],
+    functionName: "allowance",
+    abi: LPTokenABI,
+  });
+
+  if (allowance > 0) {
+    return true;
+  }
+  return false;
+}
+
 export async function getBalance(
   token_address: string,
   wallet_address: string
@@ -59,10 +74,9 @@ export async function calculateVotingPower(amount: number, unlockTime: Number) {
       functionName: "calculateVotingPower",
       args: [amount, unlockTime],
     });
-    console.log("Voting Power:");
-    console.log(voting_power);
+    console.log("Voting Power:", voting_power);
 
-    return null;
+    return voting_power;
   } catch (error) {
     console.log(error);
   }
