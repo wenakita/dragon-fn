@@ -6,7 +6,7 @@ export const instructionList = [
     instruction: "Choose a lock duration between 1 week and 4 years",
   },
   {
-    instruction: "Confirm the transaction",
+    instruction: "Confirm transaction",
   },
   {
     instruction: "Gain voting power and participate in governance decisions.",

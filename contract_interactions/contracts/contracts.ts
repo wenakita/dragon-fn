@@ -1,10 +1,16 @@
 export const contracts: any = {
-  MockPaintSwapVerifier: "0xb8249eeFe931A74269F2650f125936f506FceaA9",
-  PromotionalItemRegistry: "0x7D4a9b727BC722F522BC630f01883B002B80953b",
-  GoldScratcher: "0xe66EC78fA742B98b8a3AD7107F392EECBbDC77D5",
-  ConcreteDragonLotterySwap: "0xF52b4D3B2608B02F8d2F9Ead4282F0378aCC5845",
-  Dragon_token: "0x10eeEA6C868Ef069e3571933ea6AF2b91922b637",
-  Ve69LP: "0xb5C23c1F2BeBA4575F845DEc0E585E404BEE3082",
-  Ve69LPFeeDistributor: "0xc51EFC97d7619F202EF176232C52E42ea4A05e25",
-  PriceOracle: "0x2abC94e73A5Fc3ffF1781d9eDcadc534BFDFE51F",
+  dragon: "0x5a2e7C9f5164368B250Af2c2cdc4709c908fA686",
+  lpToken: "0xfbd43F75e09bfBcDeF8B95CEfAbf980311E6d62F",
+  ve69LP: "0x69fA10882A252A79eE57E2a246D552BA630fd955",
+  jackpot: "0x688D59e681BcC50bBA2B0FC6e98bB8bD93761074",
+  ve69lpBoost: "0x1008aDae0ef56415513f65ee5504A9c43399D866",
+  vrf: {
+    coordinator: "0x3Ba925fdeAe6B46d0BB4d424D829982Cb2F7309e",
+  },
+  constants: {
+    chainId: 146,
+    rpcUrl: "https://rpc.soniclabs.com",
+  },
+  dragonLotterySwap: "0xBb975623D78FA5092A7887A494c49a88e3021349",
+  ve69LPFeeDistributor: "0x028643A8B6bdE3B65f0B5b14b1058e0ff3Eac6cE",
 };

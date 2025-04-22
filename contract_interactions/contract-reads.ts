@@ -1,6 +1,6 @@
 import { readContract } from "viem/actions";
 import { writeContract } from "viem/actions";
-import { client } from "../config/viem_config";
+import { client } from "../config/viem_config.ts";
 import { lotto_abi } from "../config/lotto_abi";
 import { contracts } from "./contracts/contracts";
 import { ve69_ABI } from "../config/ve69-ABI";
@@ -48,19 +48,24 @@ export async function getBalance(
 
 // Calculate voting power based on amount and lock time:
 //the balanceOf read function also give us the voting power
-export async function calculateVotingPower(
-  amount: BigInteger,
-  UnlockTime: BigInteger
-) {
-  const voting_power: any = client.readContract({
-    address: contracts.Ve69LP,
-    abi: ve69_ABI,
-    functionName: "calculateVotingPower",
-  });
+//unlock time must be in unix format
+// Math.floor(Date.now() / 1000) timestamp format
+export async function calculateVotingPower(amount: number, unlockTime: Number) {
+  console.log(amount, unlockTime);
+  try {
+    const voting_power: any = await client.readContract({
+      address: "0x69fA10882A252A79eE57E2a246D552BA630fd955",
+      abi: ve69_ABI,
+      functionName: "calculateVotingPower",
+      args: [amount, unlockTime],
+    });
+    console.log("Voting Power:");
+    console.log(voting_power);
 
-  console.log(voting_power);
-
-  return null;
+    return null;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // https://github.com/wenakita/srd/blob/main/client%2Fsrc%2Fcomponents%2FProbabilityGameEntry.tsx

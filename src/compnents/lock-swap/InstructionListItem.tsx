@@ -7,7 +7,7 @@ function InstructionListItem({ instruction, step }: any) {
       >
         <div className="text-xs font-bold">{step}</div>
       </div>
-      <time className="mb-1 text-sm font-normal leading-none text-accent-70">
+      <time className="mb-1 text-xs font-normal leading-none text-accent-70">
         {instruction}
       </time>
     </li>

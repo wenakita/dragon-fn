@@ -1,9 +1,19 @@
 import { Slider } from "@mui/material";
 import LockSwapFooter from "./LockSwapFooter";
 import { CiWallet } from "react-icons/ci";
-function LockSwapper({ pair, set, setAmount, value }: any) {
-  const handleSliderChange = (event: Event, newValue: number) => {
-    set(newValue);
+import { calculateVotingPower } from "../../../contract_interactions/contract-reads";
+import { numericToUnix } from "../../time-helper/time-helper";
+function LockSwapper({
+  pair,
+  setLockTime,
+  setAmount,
+  amount,
+  lockTime,
+  setVotingPower,
+  votingPower,
+}: any) {
+  const handleSliderChange = async (event: Event, newValue: number) => {
+    setLockTime(newValue);
   };
 
   return (
@@ -51,8 +61,9 @@ function LockSwapper({ pair, set, setAmount, value }: any) {
         <div className="m-7">
           <h3 className=" text-sm font-mono font-bold mt-5">
             Locking Dragon LP for{" "}
-            {value == 7 ? `${value} days` : `${value} weeks`}
+            {lockTime == 7 ? `${lockTime} days` : `${lockTime} weeks`}
           </h3>
+          <h3>Power: {votingPower}</h3>
           {/* <h3 className="text-xs mt-2">voting power: </h3> */}
           <span>
             <Slider
@@ -61,7 +72,7 @@ function LockSwapper({ pair, set, setAmount, value }: any) {
               min={7}
               max={60}
               valueLabelDisplay="auto"
-              value={value}
+              value={lockTime}
               onChange={handleSliderChange}
               className="mt-2"
               sx={{

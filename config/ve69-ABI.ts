@@ -41,6 +41,19 @@ export const ve69_ABI = [
       {
         indexed: true,
         internalType: "address",
+        name: "newLpToken",
+        type: "address",
+      },
+    ],
+    name: "LpTokenUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "previousOwner",
         type: "address",
       },
@@ -194,6 +207,13 @@ export const ve69_ABI = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "_newLpToken", type: "address" }],
+    name: "setLpToken",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

@@ -7,8 +7,8 @@ function Navigator() {
   const { wallets } = useWallets();
   const [address, setAddress] = useState<any | null>(null);
   useEffect(() => {
-    if (wallets[0]) {
-      setAddress(wallets[0].address);
+    if (wallets.length > 0 && wallets[0].address) {
+      setAddress(wallets[0].address as `0x${string}`);
     }
   }, [wallets]);
   return (
@@ -25,9 +25,10 @@ function Navigator() {
           alt=""
         />
         <h3 className="text-[8px] mt-1.5">
-          {address && address.slice(0, 5) + "..." + address.slice(0, 3)}
+          {address && address.slice(0, 5) + "..." + address.slice(-3)}
         </h3>
         <NavigatorMenu />
+        <ConnectWalletBtn />
       </span>
     </div>
   );
