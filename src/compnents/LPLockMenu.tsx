@@ -12,6 +12,7 @@ import {
 } from "../../contract_interactions/contract-writes.ts";
 import { useWallets } from "@privy-io/react-auth";
 import { contracts } from "../../contract_interactions/contracts/contracts.ts";
+import { LPTokenABI } from "../../config/LPTokenABI.ts";
 function LPLockMenu({ available_pairs }: any) {
   const { wallets } = useWallets();
   const [lockTime, setLockTIme] = useState(0);
@@ -47,7 +48,17 @@ function LPLockMenu({ available_pairs }: any) {
       const transaction = await createVeLock(token_amount, unix_time);
     } else {
       console.log("Not Approved!");
-      approveSending();
+      const provider = await wallets[0]?.getEthereumProvider();
+      const account = await provider.request({
+        method: "eth_requestAccounts",
+      });
+      approveSending(
+        contracts.lpToken,
+        [wallets[0].address, contracts.ve69LP],
+        LPTokenABI,
+        provider,
+        account[0]
+      );
     }
     return null;
   }

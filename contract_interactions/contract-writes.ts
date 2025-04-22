@@ -1,8 +1,7 @@
 import { client } from "../config/viem_config.ts";
-import { createWalletClient } from "viem";
+import { createWalletClient, custom } from "viem";
 import { sonic } from "viem/chains";
 import { ve69_ABI } from "../config/ve69-ABI";
-
 const MAX_ALLOWANCE = 100000000;
 
 export async function createVeLock(value: number, time: number) {
@@ -23,22 +22,34 @@ export async function purchaseDragon(amount: number) {}
 
 async function sellDragon(amount: number) {}
 
-export async function approveSending(
-  spender: string,
-  approver_address: any,
-  abi: any
-) {
-  const { result } = await client.simulateContract({
-    address: approver_address,
-    abi,
-    functionName: "approve",
-    args: [spender, MAX_ALLOWANCE],
-  });
+//the provider is what we use to use viem with privy
+//ex: const provider = await embeddedWallet.getEthereumProvider();
 
-  if (result) {
-    console.log(`Simulation sucessful`);
+export async function approveSending(
+  approver_address: any,
+  args: any,
+  abi: any,
+  provider: any,
+  account: any
+) {
+  try {
+    const walletClient = await initializeWalletClient(provider, account);
+    const { request }: any = await client.simulateContract({
+      address: approver_address,
+      abi,
+      functionName: "allowance",
+      args,
+    });
+
+    await walletClient.writeContract(request);
+
+    if (request) {
+      console.log(`Approval sucessful`);
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
   }
-  return null;
 }
 
 // approveSending(
@@ -54,10 +65,11 @@ async function simulateWrite(parameters: any) {
 }
 
 //another way we can use walletClient
-async function initializeWalletClient(address: string, transport: any) {
+async function initializeWalletClient(provider: any, account: any) {
   const walletClient = createWalletClient({
-    account: address as `0x${string}`,
+    account,
     chain: sonic,
-    transport,
+    transport: custom(provider),
   });
+  return walletClient;
 }
