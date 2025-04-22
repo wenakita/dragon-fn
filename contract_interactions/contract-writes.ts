@@ -2,20 +2,33 @@ import { client } from "../config/viem_config.ts";
 import { createWalletClient, custom } from "viem";
 import { sonic } from "viem/chains";
 import { ve69_ABI } from "../config/ve69-ABI";
-const MAX_ALLOWANCE = 100000000;
+import { contracts } from "./contracts/contracts.ts";
+const MAX_ALLOWANCE = 1000000;
 
-export async function createVeLock(value: number, time: number) {
-  const { result }: any = await client.simulateContract({
-    address: "0x69fA10882A252A79eE57E2a246D552BA630fd955",
-    abi: ve69_ABI,
-    functionName: "createLock",
-    args: [value, time],
-    account: "0xa24e1426Bc37d0D1a9e7037f5De3322E800F2D7d",
-  });
+export async function createVeLock(
+  value: number,
+  time: number,
+  provider: any,
+  account: any
+) {
+  try {
+    const walletClient = await initializeWalletClient(provider, account);
+    console.log(contracts.ve69LP);
+    const { request }: any = await client.simulateContract({
+      account,
+      address: contracts.ve69LP,
+      abi: ve69_ABI,
+      functionName: "createLock",
+      args: [value, time],
+    });
 
-  console.log(result);
+    await walletClient.writeContract(request);
 
-  return null;
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
 
 export async function purchaseDragon(amount: number) {}
@@ -27,28 +40,27 @@ async function sellDragon(amount: number) {}
 
 export async function approveSending(
   approver_address: any,
-  args: any,
-  abi: any,
+  spender: any,
+  approver_abi: any,
   provider: any,
   account: any
 ) {
   try {
     const walletClient = await initializeWalletClient(provider, account);
     const { request }: any = await client.simulateContract({
+      account,
       address: approver_address,
-      abi,
-      functionName: "allowance",
-      args,
+      abi: approver_abi,
+      functionName: "approve",
+      args: [spender, MAX_ALLOWANCE],
     });
 
     await walletClient.writeContract(request);
 
-    if (request) {
-      console.log(`Approval sucessful`);
-    }
-    return null;
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 }
 
@@ -56,7 +68,7 @@ export async function approveSending(
 //   "0x69fA10882A252A79eE57E2a246D552BA630fd955",
 //   100000,
 //   "0xfbd43F75e09bfBcDeF8B95CEfAbf980311E6d62F",
-//   LPTokenABI
+//   LPTokenABISimulation
 // );
 
 async function simulateWrite(parameters: any) {

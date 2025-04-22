@@ -13,13 +13,17 @@ import {
 import { useWallets } from "@privy-io/react-auth";
 import { contracts } from "../../contract_interactions/contracts/contracts.ts";
 import { LPTokenABI } from "../../config/LPTokenABI.ts";
+import TXPopup from "./lock-swap/TXPopup.tsx";
 function LPLockMenu({ available_pairs }: any) {
   const { wallets } = useWallets();
   const [lockTime, setLockTIme] = useState(0);
   const [token_amount, set_token_amount] = useState(0);
   const [votingPower, setVotingPower] = useState();
-  const [isReady, setReady] = useState();
+  const [isReady, setReady] = useState(false);
   const [approve, setApprove] = useState(false);
+  const [wasApproved, setWasApproved] = useState(false);
+  const [wasLocked, setWasLocked] = useState(false);
+  const [txComplete, setTxComplete] = useState(true);
 
   useEffect(() => {
     if (lockTime > 0 && token_amount > 0) {
@@ -30,9 +34,15 @@ function LPLockMenu({ available_pairs }: any) {
   //change to prolly use ready to as a dependancy
   useEffect(() => {
     if (approve) {
-      lockLP();
+      approveTokens();
     }
   }, [approve]);
+
+  useEffect(() => {
+    if (wasApproved && isReady && token_amount > 0 && lockTime > 0) {
+      lockLP();
+    }
+  }, [isReady]);
   // spender: string,
   // amount: number,
   // approver_address: any,
@@ -40,27 +50,43 @@ function LPLockMenu({ available_pairs }: any) {
 
   async function lockLP() {
     const unix_time = numericToUnix(lockTime);
+    const provider = await wallets[0]?.getEthereumProvider();
+    const account = await provider.request({
+      method: "eth_requestAccounts",
+    });
+
+    const lockSuccess: any = createVeLock(
+      token_amount,
+      unix_time,
+      provider,
+      account[0]
+    );
+    setTxComplete(lockSuccess);
+    setReady(false);
+  }
+
+  async function approveTokens() {
+    const provider = await wallets[0]?.getEthereumProvider();
+    const account = await provider.request({
+      method: "eth_requestAccounts",
+    });
     const isApproved: boolean = await verifyApproval(
       wallets[0].address,
       contracts.ve69LP
     );
-    if (isApproved) {
-      const transaction = await createVeLock(token_amount, unix_time);
-    } else {
+    setWasApproved(isApproved);
+    if (!isApproved) {
       console.log("Not Approved!");
-      const provider = await wallets[0]?.getEthereumProvider();
-      const account = await provider.request({
-        method: "eth_requestAccounts",
-      });
-      approveSending(
+
+      const approval_request: any = approveSending(
         contracts.lpToken,
-        [wallets[0].address, contracts.ve69LP],
+        contracts.ve69LP,
         LPTokenABI,
         provider,
         account[0]
       );
+      setWasApproved(approval_request);
     }
-    return null;
   }
 
   async function getVotingPower() {
@@ -86,11 +112,15 @@ function LPLockMenu({ available_pairs }: any) {
             votingPower={votingPower}
           />
         </div>
+        <div>
+          <TXPopup txComplete={txComplete} setTxComplete={setTxComplete} />
+        </div>
         <div className="border bg-zinc-900/60 border-zinc-800 rounded-2xl w-full p-7 mt-2 md:mt-0">
           <LockSwapInstructions
             setReady={setReady}
             ready={isReady}
             setApprove={setApprove}
+            wasApproved={wasApproved}
           />
         </div>
       </div>

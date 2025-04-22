@@ -47,6 +47,7 @@ export async function verifyApproval(owner: string, spender: string) {
     functionName: "allowance",
     abi: LPTokenABI,
   });
+  console.log("Allowance: ", allowance);
 
   if (allowance > 0) {
     return true;
