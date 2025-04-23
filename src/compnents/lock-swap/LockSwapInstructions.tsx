@@ -36,6 +36,7 @@ function LockSwapInstructions({
           onClick={() => {
             setReady(true);
           }}
+          disabled={!wasApproved}
         >
           <span className="flex justify-center gap-1">
             <CiLock className="mt-0.5 font-bold" />

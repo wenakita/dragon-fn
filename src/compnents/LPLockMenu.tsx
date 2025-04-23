@@ -1,102 +1,22 @@
-import { useEffect, useState } from "react";
+import { useTokenLock } from "../hooks/useTokenLock";
 import LockSwapInstructions from "./lock-swap/LockSwapInstructions";
 import LockSwapper from "./lock-swap/LockSwapper";
-import {
-  calculateVotingPower,
-  verifyApproval,
-} from "../../contract_interactions/contract-reads";
-import { numericToUnix } from "../time-helper/time-helper";
-import {
-  approveSending,
-  createVeLock,
-} from "../../contract_interactions/contract-writes.ts";
-import { useWallets } from "@privy-io/react-auth";
-import { contracts } from "../../contract_interactions/contracts/contracts.ts";
-import { LPTokenABI } from "../../config/LPTokenABI.ts";
-import TXPopup from "./lock-swap/TXPopup.tsx";
+import TXPopup from "./lock-swap/TXPopup";
 function LPLockMenu({ available_pairs }: any) {
-  const { wallets } = useWallets();
-  const [lockTime, setLockTIme] = useState(0);
-  const [token_amount, set_token_amount] = useState(0);
-  const [votingPower, setVotingPower] = useState();
-  const [isReady, setReady] = useState(false);
-  const [approve, setApprove] = useState(false);
-  const [wasApproved, setWasApproved] = useState(false);
-  const [wasLocked, setWasLocked] = useState(false);
-  const [txComplete, setTxComplete] = useState(true);
-
-  useEffect(() => {
-    if (lockTime > 0 && token_amount > 0) {
-      getVotingPower();
-    }
-  }, [lockTime]);
-
-  //change to prolly use ready to as a dependancy
-  useEffect(() => {
-    if (approve) {
-      approveTokens();
-    }
-  }, [approve]);
-
-  useEffect(() => {
-    if (wasApproved && isReady && token_amount > 0 && lockTime > 0) {
-      lockLP();
-    }
-  }, [isReady]);
-  // spender: string,
-  // amount: number,
-  // approver_address: any,
-  // abi: any
-
-  async function lockLP() {
-    const unix_time = numericToUnix(lockTime);
-    const provider = await wallets[0]?.getEthereumProvider();
-    const account = await provider.request({
-      method: "eth_requestAccounts",
-    });
-
-    const lockSuccess: any = createVeLock(
-      token_amount,
-      unix_time,
-      provider,
-      account[0]
-    );
-    setTxComplete(lockSuccess);
-    setReady(false);
-  }
-
-  async function approveTokens() {
-    const provider = await wallets[0]?.getEthereumProvider();
-    const account = await provider.request({
-      method: "eth_requestAccounts",
-    });
-    const isApproved: boolean = await verifyApproval(
-      wallets[0].address,
-      contracts.ve69LP
-    );
-    setWasApproved(isApproved);
-    if (!isApproved) {
-      console.log("Not Approved!");
-
-      const approval_request: any = approveSending(
-        contracts.lpToken,
-        contracts.ve69LP,
-        LPTokenABI,
-        provider,
-        account[0]
-      );
-      setWasApproved(approval_request);
-    }
-  }
-
-  async function getVotingPower() {
-    const unix_time = numericToUnix(lockTime);
-    const calculated_voting_power: any = await calculateVotingPower(
-      token_amount,
-      unix_time
-    );
-    setVotingPower(calculated_voting_power);
-  }
+  const {
+    lockTime,
+    setLockTime,
+    tokenAmount,
+    setTokenAmount,
+    votingPower,
+    isReady,
+    setReady,
+    approve,
+    setApprove,
+    wasApproved,
+    txComplete,
+    setTxComplete,
+  }: any = useTokenLock();
   //loading animation when lock lp clicked
   return (
     <div className="text-white  container p-0 md:p-1">
@@ -105,15 +25,19 @@ function LPLockMenu({ available_pairs }: any) {
         <div className=" border bg-zinc-900/60 border-zinc-800 rounded-2xl p-12 md:col-span-2">
           <LockSwapper
             pair={available_pairs[0]}
-            setLockTime={setLockTIme}
-            setAmount={set_token_amount}
-            amount={token_amount}
+            setLockTime={setLockTime}
+            setAmount={setTokenAmount}
+            amount={tokenAmount}
             lockTime={lockTime}
             votingPower={votingPower}
           />
         </div>
         <div>
-          <TXPopup txComplete={txComplete} setTxComplete={setTxComplete} />
+          <TXPopup
+            txComplete={txComplete}
+            ready={isReady}
+            setReady={setReady}
+          />
         </div>
         <div className="border bg-zinc-900/60 border-zinc-800 rounded-2xl w-full p-7 mt-2 md:mt-0">
           <LockSwapInstructions

@@ -1,14 +1,14 @@
-import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Box, Modal, Typography } from "@mui/material";
+import { MdError } from "react-icons/md";
 
-function TXPopup({ txComplete, setTxComplete }: any) {
+import { FaCheckCircle } from "react-icons/fa";
+function TXPopup({ txComplete, setTxComplete, ready, setReady }: any) {
   const handleClose = () => {
-    setTxComplete(false);
-    return "None";
+    setReady(false);
   };
   return (
     <Modal
-      open={txComplete}
+      open={ready}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -33,21 +33,26 @@ function TXPopup({ txComplete, setTxComplete }: any) {
           className="text-white flex justify-between"
         >
           <h3>Lock LP Tokens</h3>
-          {/* <button className="font-extrabold me-2" onClick={handleClose}>
+          <button className="font-extrabold me-2" onClick={handleClose}>
             X
-          </button> */}
+          </button>
         </Typography>
         <Typography
           id="modal-modal-description"
           sx={{ mt: 2 }}
           className="text-white p-5"
         >
-          <AiOutlineLoading3Quarters
-            color="393646"
-            className="animate-spin size-12 ms-auto me-auto  font-extrabold"
-          />
+          {txComplete.complete ? (
+            <FaCheckCircle className="" />
+          ) : (
+            // <AiOutlineLoading3Quarters
+            //   color="393646"
+            //   className="animate-spin size-12 ms-auto me-auto  font-extrabold"
+            // />
+            <MdError className="size-10 m-auto text-red-500" />
+          )}
           <h3 className="mt-5  text-center text-xs text-white">
-            Locking you tokens...
+            {txComplete.message || "Locking you tokens..."}
           </h3>
         </Typography>
       </Box>

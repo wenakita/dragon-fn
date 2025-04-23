@@ -24,10 +24,10 @@ export async function createVeLock(
 
     await walletClient.writeContract(request);
 
-    return true;
+    return { complete: true, message: "Tokens successfully locked!" };
   } catch (error) {
     console.log(error);
-    return false;
+    return { complete: false, message: "No Funds!" };
   }
 }
 
