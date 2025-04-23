@@ -32,7 +32,7 @@ function LPLockMenu({ available_pairs }: any) {
             votingPower={votingPower}
           />
         </div>
-        <div>
+        <div className="absolute">
           <TXPopup
             txComplete={txComplete}
             ready={isReady}

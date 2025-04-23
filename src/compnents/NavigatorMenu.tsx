@@ -34,9 +34,12 @@ function NavigatorMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <span className="border bg-stone-900">
+          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+
+          <MenuItem onClick={handleClose}>Lock LP</MenuItem>
+          <MenuItem onClick={handleClose}>Vote</MenuItem>
+        </span>
       </Menu>
     </div>
   );
