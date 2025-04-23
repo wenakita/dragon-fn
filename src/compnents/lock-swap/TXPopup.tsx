@@ -2,7 +2,7 @@ import { Box, Modal, Typography } from "@mui/material";
 import { MdError } from "react-icons/md";
 
 import { FaCheckCircle } from "react-icons/fa";
-function TXPopup({ txComplete, setTxComplete, ready, setReady }: any) {
+function TXPopup({ txComplete, ready, setReady }: any) {
   const handleClose = () => {
     setReady(false);
   };

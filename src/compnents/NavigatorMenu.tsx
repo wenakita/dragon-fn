@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { FiMenu } from "react-icons/fi";
+import { Link } from "react-router";
 function NavigatorMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -33,12 +34,20 @@ function NavigatorMenu() {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+        className=""
       >
         <span className="border bg-stone-900">
-          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to={"/dashboard"}>Dashboard</Link>
+          </MenuItem>
 
-          <MenuItem onClick={handleClose}>Lock LP</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to={"/lock"}>Lock LP</Link>
+          </MenuItem>
           <MenuItem onClick={handleClose}>Vote</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to={"/"}>Home</Link>
+          </MenuItem>
         </span>
       </Menu>
     </div>

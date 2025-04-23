@@ -7,6 +7,7 @@ import Layout from "./compnents/Layout";
 import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
 import LockLP from "./pages/LockLP";
+import Dashboard from "./compnents/user-dashboard/Dashboard";
 function App() {
   useEffect(() => {
     async function test() {
@@ -15,6 +16,7 @@ function App() {
     }
     test();
   });
+  //here lets make a single page to connect wallet every time a user triews to access dashboard or lock or vote they must go to login page
   return (
     <>
       <BrowserRouter>
@@ -22,6 +24,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/lock" element={<LockLP />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>
