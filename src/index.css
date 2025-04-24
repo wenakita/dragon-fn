@@ -21,3 +21,47 @@ Cool Contrast (optional): #4C5C68 – steel blue-gray for visual balance
 Text Primary: #F4F4F5 – clean near-white for strong readability
 
 Text Secondary: #B0B3BA – light grey for muted content */
+
+
+/* #1E1F24 (Base Background)
+
+Used as the main backdrop for the site.
+
+Feels dark but not oppressive — sets the tone without killing contrast.
+
+#2A2B30 (Surface)
+
+Applied to cards, modals, navbars, and UI containers.
+
+Provides a subtle lift against the background for depth and separation.
+
+#FF6B00 (Primary Accent)
+
+Key branding color: buttons, call-to-action (CTA), highlights, hover states.
+
+Matches your logo and creates strong focal points.
+
+#FFC857 (Highlight/Secondary)
+
+Used sparingly: hover effects, tags, highlights, icons.
+
+Adds warmth and brightness without overwhelming.
+
+#4C5C68 (Cool Contrast)
+
+Optional for text links, borders, or background gradients.
+
+Adds contrast and coolness to balance the warmth of the oranges.
+
+#F4F4F5 (Primary Text)
+
+Main text color for headers, body, and anything important.
+
+Clean and high contrast for readability on dark surfaces.
+
+#B0B3BA (Secondary Text)
+
+For subtitles, descriptions, placeholders, metadata.
+
+Softer, doesn’t compete with the main content.
+ */

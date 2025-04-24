@@ -1,10 +1,10 @@
 import HomeGrid from "../compnents/HomeGrid";
 function Home() {
   return (
-    <div className="">
+    <div className="mt-5 container">
       <div>
-        <h3 className="text-white  text-center m-auto text-[45px]  font-[485] font-sans w-[70%] border">
-          Lock Dragon. Win Big!
+        <h3 className="text-white  text-center m-auto text-[60px]  font-[485] font-sans whitespace-wrap ">
+          Lock, Vote Win Big.
         </h3>
       </div>
     </div>

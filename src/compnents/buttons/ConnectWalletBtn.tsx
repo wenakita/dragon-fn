@@ -26,7 +26,7 @@ function ConnectWalletBtn({ color }: any) {
           onClick={() => {
             checkUserStatus();
           }}
-          className="border border-orange-500/50 rounded-full"
+          className="border border-orange-500/50 hover:animate-pulse rounded-full bg-stone-900"
         >
           <svg
             height={25}
