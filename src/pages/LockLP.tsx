@@ -1,4 +1,4 @@
-import LPLockMenu from "../compnents/LPLockMenu";
+import LPLockMenu from "./lock-swap/LPLockMenu";
 
 function LockLP() {
   const available_tokens = [

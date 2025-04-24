@@ -7,7 +7,7 @@ import Layout from "./compnents/Layout";
 import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
 import LockLP from "./pages/LockLP";
-import Dashboard from "./compnents/user-dashboard/Dashboard";
+import Dashboard from "./pages/user-dashboard/Dashboard";
 import VoteMain from "./compnents/voting/VoteMain";
 function App() {
   useEffect(() => {

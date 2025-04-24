@@ -1,7 +1,7 @@
-import { useTokenLock } from "../hooks/useTokenLock";
-import LockSwapInstructions from "./lock-swap/LockSwapInstructions";
-import LockSwapper from "./lock-swap/LockSwapper";
-import TXPopup from "./lock-swap/TXPopup";
+import { useTokenLock } from "../../hooks/useTokenLock";
+import LockSwapInstructions from "./LockSwapInstructions";
+import LockSwapper from "./LockSwapper";
+import TXPopup from "./TXPopup";
 function LPLockMenu({ available_pairs }: any) {
   const {
     lockTime,

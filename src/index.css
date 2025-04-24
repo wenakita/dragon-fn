@@ -4,5 +4,20 @@
 @tailwind utilities;
 
 :root {
-  background-color: rgb(9 9 9);
+  background-color: #1e1f24;
 }
+/* 
+color palete
+Base Background: #1E1F24 – soft black with a bluish tint
+
+Surface (cards, modals): #2A2B30 – slightly lighter for depth layering
+
+Primary Accent: #FF6B00 – punchy orange to match your dragon
+
+Highlight/Secondary: #FFC857 – soft golden tone for contrast
+
+Cool Contrast (optional): #4C5C68 – steel blue-gray for visual balance
+
+Text Primary: #F4F4F5 – clean near-white for strong readability
+
+Text Secondary: #B0B3BA – light grey for muted content */

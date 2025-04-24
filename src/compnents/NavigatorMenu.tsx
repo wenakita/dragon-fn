@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { FiMenu } from "react-icons/fi";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router";
 function NavigatorMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -23,8 +24,9 @@ function NavigatorMenu() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         className="text-white border bg-white"
+        variant="primary"
       >
-        <FiMenu className="text-xl" />
+        <HiOutlineDotsHorizontal className="text-[20px]" />
       </Button>
       <Menu
         id="basic-menu"
