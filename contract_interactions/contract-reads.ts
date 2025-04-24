@@ -80,7 +80,19 @@ export async function calculateVotingPower(amount: number, unlockTime: Number) {
     return voting_power;
   } catch (error) {
     console.log(error);
+    return null;
   }
+}
+
+//ve69LP uses this
+export async function getVotingPower(address: string) {
+  const voting_power = await client.readContract({
+    address: contracts.ve69LP,
+    abi: ve69_ABI,
+    functionName: "balanceOf",
+    args: [address],
+  });
+  return voting_power;
 }
 
 // https://github.com/wenakita/srd/blob/main/client%2Fsrc%2Fcomponents%2FProbabilityGameEntry.tsx

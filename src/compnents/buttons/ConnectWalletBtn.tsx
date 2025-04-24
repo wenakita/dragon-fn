@@ -1,18 +1,18 @@
 import { usePrivy } from "@privy-io/react-auth";
 import useWalletStatus from "../../hooks/useWallletStatus";
 function ConnectWalletBtn({ color }: any) {
+  const { login, logout } = usePrivy();
   const isLoggedIn = useWalletStatus();
-  const { login } = usePrivy();
-  console.log(isLoggedIn);
 
   function CheckElement() {
+    console.log(`is logged in? : ${isLoggedIn}`);
     if (isLoggedIn) {
       return (
         <button
+          className="mt-1.5 border border-orange-500/50 hover:animate-pulse rounded-full bg-[#FF6B00]"
           onClick={() => {
-            // checkUserStatus();
+            logout();
           }}
-          className="border border-orange-500/50 hover:animate-pulse rounded-full bg-[#FFC857]"
         >
           <svg
             height={25}
@@ -41,7 +41,9 @@ function ConnectWalletBtn({ color }: any) {
         <button
           type="button"
           className="text-[#34363f] text-sm font-extrabold border border-[#4C5C68] p-1.5 rounded-3xl bg-[#FFC857]"
-          onClick={login}
+          onClick={() => {
+            login();
+          }}
         >
           Log in
         </button>
