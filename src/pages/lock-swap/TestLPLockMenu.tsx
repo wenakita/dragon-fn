@@ -3,12 +3,19 @@ import React from "react";
 import { FaBoltLightning } from "react-icons/fa6";
 import VotingPowerCard from "./VotingPowerCard";
 import LockSwapTabs from "./LockSwapTabs";
+import LockSwapModal from "./LockSwapModal";
 function TestLPLockMenu() {
   return (
-    <div className="p-1 border container p-4 m-auto">
-      <VotingPowerCard />
-
-      <LockSwapTabs />
+    <div className=" container p-3 m-auto">
+      <div className="p-3">
+        <VotingPowerCard />
+      </div>
+      <div className="mt-4">
+        <LockSwapTabs />
+      </div>
+      <div className="mt-4 ">
+        <LockSwapModal />
+      </div>
     </div>
   );
 }

@@ -2,8 +2,9 @@ import React from "react";
 import { Card, CardContent } from "@mui/material";
 import { FaBoltLightning } from "react-icons/fa6";
 import { useUserStats } from "../../hooks/useUserStats";
+import Divider from "@mui/material/Divider";
 function VotingPowerCard() {
-  const user_stats = useUserStats();
+  const userStats: any = useUserStats();
   return (
     <Card
       variant="outlined"
@@ -21,16 +22,20 @@ function VotingPowerCard() {
         <span className="grid grid-rows-3 font-bold text-[12px] gap-1 mt-2">
           <span className="flex justify-between">
             <h3>LP Locked</h3>
-            <h3>-</h3>
+            <h3>{userStats.tokens_locked}</h3>
           </span>
           <span className="flex justify-between">
             <h3>Total Voting Power</h3>
-            <h3>-</h3>
+            <h3>{userStats.votingPower}</h3>
           </span>{" "}
           <span className="flex justify-between">
             <h3>Jackpots Won</h3>
-            <h3>-</h3>
+            <h3>0</h3>
           </span>
+          <span className="mt-1">
+            <Divider sx={{ borderColor: "#4C5C68" }} />
+          </span>
+          <span className="mt-2">Total Entries: 2</span>
         </span>
       </span>
     </Card>

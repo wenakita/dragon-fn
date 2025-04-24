@@ -95,4 +95,20 @@ export async function getVotingPower(address: string) {
   return voting_power;
 }
 
+//checks to see the info on a users lock
+export async function locked(address: string) {
+  const lock_info = await client.readContract({
+    address: contracts.ve69LP,
+    abi: ve69_ABI,
+    functionName: "locked",
+    args: [address],
+  });
+
+  return lock_info;
+}
+
+export async function jackpotsWon(address: string) {
+  return null;
+}
+
 // https://github.com/wenakita/srd/blob/main/client%2Fsrc%2Fcomponents%2FProbabilityGameEntry.tsx
