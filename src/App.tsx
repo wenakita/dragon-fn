@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import LockLP from "./pages/LockLP";
 import Dashboard from "./pages/user-dashboard/Dashboard";
 import VoteMain from "./compnents/voting/VoteMain";
+import TestLPLockMenu from "./pages/lock-swap/TestLPLockMenu";
 function App() {
   useEffect(() => {
     async function test() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/lock" element={<LockLP />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vote" element={<VoteMain />} />
+            <Route path="/sandbox" element={<TestLPLockMenu />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -23,10 +23,9 @@ function NavigatorMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className="text-white border bg-white"
-        variant="primary"
+        className=""
       >
-        <HiOutlineDotsHorizontal className="text-[20px]" />
+        <HiOutlineDotsHorizontal className="text-[23px] text-[#B0B3BA] mt-1" />
       </Button>
       <Menu
         id="basic-menu"
@@ -36,9 +35,16 @@ function NavigatorMenu() {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
-        className=""
+        className="text-xs"
+        PaperProps={{
+          sx: {
+            backgroundColor: "#2A2B30",
+            color: "#F4F4F5",
+            border: "1px solid #4C5C68",
+          },
+        }}
       >
-        <span className="border bg-stone-900">
+        <span className="">
           <MenuItem onClick={handleClose}>
             <Link to={"/dashboard"}>Dashboard</Link>
           </MenuItem>

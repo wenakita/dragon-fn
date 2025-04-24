@@ -15,9 +15,9 @@ function Navigator() {
   }, [wallets]);
 
   return (
-    <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2 text-white flex justify-between">
+    <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
       <span className="flex gap-3">
-        <img src={imgUrl} alt="" className="w-[40px]" />
+        <img src={imgUrl} alt="" className="w-[50px]" />
 
         {/* <h1 className="mt-auto mb-auto">Dragon</h1> */}
       </span>

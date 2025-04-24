@@ -22,7 +22,7 @@ function LPLockMenu({ available_pairs }: any) {
     <div className="text-white  container p-0 md:p-1">
       {/* <h1 className="mt-4 text-xs text-gray-400">Available Locks</h1> */}
       <div className=" grid grid-flow-row md:grid-cols-3 gap-2 md:m-8">
-        <div className=" border bg-zinc-900/60 border-zinc-800 rounded-2xl p-12 md:col-span-2">
+        <div className=" border bg-[#1E1F24] border-zinc-800 rounded-2xl p-12 md:col-span-2">
           <LockSwapper
             pair={available_pairs[0]}
             setLockTime={setLockTime}

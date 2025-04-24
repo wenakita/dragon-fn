@@ -1,32 +1,18 @@
-import React, { useState } from "react";
 import { usePrivy } from "@privy-io/react-auth";
+import useWalletStatus from "../../hooks/useWallletStatus";
 function ConnectWalletBtn({ color }: any) {
-  const { ready, login, logout, authenticated } = usePrivy();
+  const isLoggedIn = useWalletStatus();
+  const { login } = usePrivy();
+  console.log(isLoggedIn);
 
-  function checkUserStatus() {
-    if (authenticated && ready) {
-      logout();
-    } else {
-      login();
-    }
-  }
-
-  function getText() {
-    if (authenticated && ready) {
-      return "Logout";
-    } else {
-      return "Log in";
-    }
-  }
-
-  function Status() {
-    return (
-      <span className="">
+  function CheckElement() {
+    if (isLoggedIn) {
+      return (
         <button
           onClick={() => {
-            checkUserStatus();
+            // checkUserStatus();
           }}
-          className="border border-orange-500/50 hover:animate-pulse rounded-full bg-stone-900"
+          className="border border-orange-500/50 hover:animate-pulse rounded-full bg-[#FFC857]"
         >
           <svg
             height={25}
@@ -49,6 +35,24 @@ function ConnectWalletBtn({ color }: any) {
             </g>
           </svg>
         </button>
+      );
+    } else {
+      return (
+        <button
+          type="button"
+          className="text-[#34363f] text-sm font-extrabold border border-[#4C5C68] p-1.5 rounded-3xl bg-[#FFC857]"
+          onClick={login}
+        >
+          Log in
+        </button>
+      );
+    }
+  }
+
+  function Status() {
+    return (
+      <span className="">
+        <CheckElement />
       </span>
     );
   }
