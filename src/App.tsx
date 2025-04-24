@@ -8,6 +8,7 @@ import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
 import LockLP from "./pages/LockLP";
 import Dashboard from "./compnents/user-dashboard/Dashboard";
+import VoteMain from "./compnents/voting/VoteMain";
 function App() {
   useEffect(() => {
     async function test() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/lock" element={<LockLP />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/vote" element={<VoteMain />} />
           </Route>
         </Routes>
       </BrowserRouter>

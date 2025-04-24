@@ -44,7 +44,9 @@ function NavigatorMenu() {
           <MenuItem onClick={handleClose}>
             <Link to={"/lock"}>Lock LP</Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>Vote</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to={"/vote"}>Vote</Link>
+          </MenuItem>
           <MenuItem onClick={handleClose}>
             <Link to={"/"}>Home</Link>
           </MenuItem>

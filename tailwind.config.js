@@ -3,6 +3,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    screens: {
+      xxs: "140px", // min-width
+    },
   },
   plugins: [],
 };
