@@ -13,9 +13,6 @@ function TestLPLockMenu() {
       <div className="mt-4">
         <LockSwapTabs />
       </div>
-      <div className="mt-4 ">
-        <LockSwapModal />
-      </div>
     </div>
   );
 }
