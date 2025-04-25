@@ -13,7 +13,7 @@ function LPPairsModal({
 }: any) {
   const style = {
     position: "absolute",
-    top: "23%",
+    top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 430,
@@ -22,7 +22,7 @@ function LPPairsModal({
     borderRadius: "10px",
     color: "#F4F4F5",
     boxShadow: 24,
-
+    outline: "none",
     p: 3,
   };
   return (
@@ -43,11 +43,11 @@ function LPPairsModal({
               /> */}
               <input
                 type="text"
-                className="outline-0 border rounded-md w-full font-light text-sm p-1.5"
+                className="outline-[#FF6B00] border-1 rounded-md w-full font-light text-sm p-1.5 border-[#4C5C68]"
                 placeholder="Search name or paste address"
               />
             </span>
-            <span className=" rounded-md p-1 border border-[#4C5C68]  bg-[#5f6166]">
+            <span className=" rounded-md p-1 border border-[#4C5C68] outline-[#outline-[#FF6B00]">
               <span className="brder flex justify-center">
                 <img
                   src="https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
@@ -58,7 +58,7 @@ function LPPairsModal({
             </span>
           </span>
           <span className="">
-            <span className="grid grid-flow-row mt-5">
+            <span className="grid grid-flow-row mt-5 h-100 overflow-y-auto gap-1.5">
               {dragonPools.map((pool, key) => {
                 return (
                   <PoolPairItem pool={pool} setPoolSelected={setPoolSelected} />

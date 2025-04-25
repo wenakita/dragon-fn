@@ -3,13 +3,29 @@ import imgUrl from "../../assets/dragon.png";
 import lockswapContent from "../../../config/LockSwapContent";
 import { useUserStats } from "../../hooks/useUserStats";
 import LPPairsModal from "./LPPairsModal";
+import { useTokenLock } from "../../hooks/useTokenLock";
+import LockSlider from "./LockSlider";
 //{ title, description, logo, token_name }
 function LockSwapModal({ type }: any) {
-  console.log(lockswapContent[type]);
+  const {
+    lockTime,
+    setLockTime,
+    tokenAmount,
+    setTokenAmount,
+    votingPower,
+    isReady,
+    setReady,
+    approve,
+    setApprove,
+    wasApproved,
+    txComplete,
+    setTxComplete,
+    poolSelected,
+    setPoolSelected,
+  }: any = useTokenLock(type);
   const { title, description, btn } = lockswapContent[type];
   const { lp_balance }: any = useUserStats();
   const [open, setOpen] = useState(false);
-  const [poolSelected, setPoolSelected] = useState(null);
 
   useEffect(() => {
     handleClose();
@@ -20,7 +36,7 @@ function LockSwapModal({ type }: any) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div className="text-white w-[93%] p-3 m-auto border border-[#4C5C68] bg-[#2A2B30] rounded-md">
+    <div className="text-white w-[93%] p-3 m-auto border-0 border-[#FF6B00] bg-[#2A2B30] rounded-md">
       <h1 className="title text-2xl font-bold">
         {lockswapContent[type].title}{" "}
       </h1>
@@ -44,10 +60,29 @@ function LockSwapModal({ type }: any) {
                   handleModalOpen();
                   handleOpen();
                 }}
-                className="flex justify-center border  text-sm p-0.5 rounded-md gap-1 bg-[#383941] border-[#4C5C68]"
+                className="flex justify-center border  text-sm p-0.5 rounded-md gap-3 bg-[#383941] border-[#4C5C68] p-1"
               >
-                <img src={imgUrl} alt="" className="w-8" />
-                <h3 className="mt-1 font-extrabold text-sm me-2">DRAGON</h3>
+                <div className="relative size-5.5">
+                  <img
+                    src={
+                      poolSelected
+                        ? poolSelected.logo1
+                        : "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
+                    }
+                    className="w-full h-full rounded-lg object-cover"
+                  />
+
+                  <div className="absolute bottom-1 left-[12px] rig top-2.5 size-3.5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
+                    <img
+                      src={imgUrl}
+                      alt="Badge"
+                      className="w-full h-full object-cover bg-stone-500"
+                    />
+                  </div>
+                </div>
+                <h3 className="mt-1 font-extrabold text-sm me-2">
+                  {poolSelected ? poolSelected.symbol : "DRAGON"}
+                </h3>
               </button>
             </span>
             <h3 className="mt-1 font-bold text-[9px] me-2">
@@ -56,11 +91,40 @@ function LockSwapModal({ type }: any) {
           </span>
         </div>
       </div>
-      <div className="p-3  flex justify-center text-center">
-        <button className="border w-full p-2 rounded-md bg-[#FF6B00] border-[#383941] font-extrabold mt-2 hover:bg-[#FF6B00]/70">
+      <div className="p-4 flex justify-center h-14">
+        <LockSlider />
+      </div>
+      <div className="grid grid-cols-2 border rounded-lg w-90 m-auto">
+        <div className="border-r-1">
+          <h3 className="text-center">Lock Time:</h3>
+          <span className="flex justify-center gap-2">
+            <h3 className="text-center text-[30px]">26</h3>
+            <h3 className="text-center text-[10px]  mt-auto mb-2.5">days</h3>
+          </span>
+        </div>
+        <div>
+          <h3 className="text-center">Voting Power:</h3>
+        </div>
+      </div>
+      <div className="p-3  flex justify-center text-center gap-2">
+        <button
+          className="border w-full p-2 rounded-md bg-[#FF6B00] border-[#383941] font-extrabold mt-2 hover:bg-[#FF6B00]/70"
+          onClick={() => {
+            setReady(true);
+          }}
+        >
+          <span className="">Lock Time</span>
+        </button>
+        <button
+          className="border w-full p-2 rounded-md bg-[#FF6B00] border-[#383941] font-extrabold mt-2 hover:bg-[#FF6B00]/70"
+          onClick={() => {
+            setReady(true);
+          }}
+        >
           <span className="">{btn}</span>
         </button>
       </div>
+
       <span>
         <LPPairsModal
           open={open}

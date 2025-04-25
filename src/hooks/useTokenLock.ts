@@ -9,7 +9,7 @@ import { approveSending } from "../../contract_interactions/contract-writes.ts";
 import { contracts } from "../../contract_interactions/contracts/contracts";
 import { LPTokenABI } from "../../config/LPTokenABI";
 
-export function useTokenLock() {
+export function useTokenLock(type: string) {
   const { wallets } = useWallets();
   const [lockTime, setLockTime] = useState(0);
   const [tokenAmount, setTokenAmount] = useState(0);
@@ -21,12 +21,7 @@ export function useTokenLock() {
     completed: false,
     message: null,
   });
-
-  useEffect(() => {
-    if (lockTime > 0 && tokenAmount > 0) {
-      getVotingPower();
-    }
-  }, [lockTime]);
+  const [poolSelected, setPoolSelected] = useState(null);
 
   useEffect(() => {
     if (approve) {
@@ -38,7 +33,22 @@ export function useTokenLock() {
     if (wasApproved && isReady && tokenAmount > 0 && lockTime > 0) {
       lockLP();
     }
-  }, [isReady]);
+  }, [isReady, lockTime, isReady, wasApproved]);
+
+  function handleTXEvent() {
+    switch (type) {
+      case "lock":
+        lockLP();
+        break;
+
+      case "increase":
+        increaseLockAmount();
+        break;
+      case "extend":
+        extendLockTime();
+        break;
+    }
+  }
 
   async function lockLP() {
     const unix_time = numericToUnix(lockTime);
@@ -76,6 +86,10 @@ export function useTokenLock() {
     }
   }
 
+  async function increaseLockAmount() {}
+
+  async function extendLockTime() {}
+
   async function getVotingPower() {
     const unix_time = numericToUnix(lockTime);
     const power = await calculateVotingPower(tokenAmount, unix_time);
@@ -95,5 +109,7 @@ export function useTokenLock() {
     wasApproved,
     txComplete,
     setTxComplete,
+    poolSelected,
+    setPoolSelected,
   };
 }
