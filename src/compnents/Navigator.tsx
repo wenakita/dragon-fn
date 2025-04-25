@@ -13,6 +13,7 @@ function Navigator() {
       setAddress(wallets[0].address as `0x${string}`);
     }
   }, [wallets]);
+  console.log(imgUrl);
 
   return (
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">

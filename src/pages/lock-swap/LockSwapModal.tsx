@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import imgUrl from "../../assets/dragon.png";
 import lockswapContent from "../../../config/LockSwapContent";
+import { useUserStats } from "../../hooks/useUserStats";
+import LPPairsModal from "./LPPairsModal";
 //{ title, description, logo, token_name }
 function LockSwapModal({ type }: any) {
   console.log(lockswapContent[type]);
   const { title, description, btn } = lockswapContent[type];
+  const { lp_balance }: any = useUserStats();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div className="text-white w-[93%] p-3 m-auto border border-[#4C5C68] bg-[#2A2B30] rounded-md">
       <h1 className="title text-2xl font-bold">
@@ -17,19 +24,25 @@ function LockSwapModal({ type }: any) {
         </h3>
         <div className="grid grid-cols-8 mt-2 ">
           <span className=" col-span-3">
-            <input type="number" placeholder="0" className="text-xl h-full" />
+            <input
+              type="tex"
+              placeholder="0"
+              className="text-xl h-full outline-0"
+            />
           </span>
-          <span className="col-span-5 ms-auto ">
-            <span className="">
+          <span className="col-span-5 ms-auto  ">
+            <span className="flex justify-end">
               <button
-                disabled={true}
+                onClick={handleOpen}
                 className="flex justify-center border  text-sm p-0.5 rounded-md gap-1 bg-[#383941] border-[#4C5C68]"
               >
                 <img src={imgUrl} alt="" className="w-8" />
                 <h3 className="mt-1 font-extrabold text-sm me-2">DRAGON</h3>
               </button>
             </span>
-            <h3 className="mt-1 font-bold text-[9px] me-2">Balance:</h3>
+            <h3 className="mt-1 font-bold text-[9px] me-2">
+              Balance:{lp_balance}
+            </h3>
           </span>
         </div>
       </div>
@@ -38,6 +51,14 @@ function LockSwapModal({ type }: any) {
           <span className="">{btn}</span>
         </button>
       </div>
+      <span>
+        <LPPairsModal
+          open={open}
+          setOpen={setOpen}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+        />
+      </span>
     </div>
   );
 }

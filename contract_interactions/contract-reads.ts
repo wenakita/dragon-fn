@@ -55,10 +55,18 @@ export async function verifyApproval(owner: string, spender: string) {
   return false;
 }
 
-export async function getBalance(
-  token_address: string,
+export async function getPoolBalance(
+  token_address: any,
   wallet_address: string
-) {}
+) {
+  const balance = await client.readContract({
+    address: token_address,
+    abi: LPTokenABI,
+    functionName: "balanceOf",
+    args: [wallet_address],
+  });
+  return balance;
+}
 
 ///
 
