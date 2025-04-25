@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imgUrl from "../../assets/dragon.png";
 import lockswapContent from "../../../config/LockSwapContent";
 import { useUserStats } from "../../hooks/useUserStats";
@@ -9,6 +9,13 @@ function LockSwapModal({ type }: any) {
   const { title, description, btn } = lockswapContent[type];
   const { lp_balance }: any = useUserStats();
   const [open, setOpen] = useState(false);
+  const [poolSelected, setPoolSelected] = useState(null);
+
+  useEffect(() => {
+    handleClose();
+  }, [poolSelected]);
+
+  const handleModalOpen = () => setPoolSelected(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -33,7 +40,10 @@ function LockSwapModal({ type }: any) {
           <span className="col-span-5 ms-auto  ">
             <span className="flex justify-end">
               <button
-                onClick={handleOpen}
+                onClick={() => {
+                  handleModalOpen();
+                  handleOpen();
+                }}
                 className="flex justify-center border  text-sm p-0.5 rounded-md gap-1 bg-[#383941] border-[#4C5C68]"
               >
                 <img src={imgUrl} alt="" className="w-8" />
@@ -57,6 +67,7 @@ function LockSwapModal({ type }: any) {
           setOpen={setOpen}
           handleOpen={handleOpen}
           handleClose={handleClose}
+          setPoolSelected={setPoolSelected}
         />
       </span>
     </div>

@@ -1,5 +1,6 @@
 export const dragonPools = [
   {
+    name: "99DRAGON 1wS",
     symbol: "99DRAGON-1wS",
     address: "0xeA2271DAD89385119A88Ce0BB957DEf053aE560A",
     logo1:
