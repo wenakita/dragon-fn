@@ -5,6 +5,8 @@ import { useUserStats } from "../../hooks/useUserStats";
 import LPPairsModal from "./LPPairsModal";
 import { useTokenLock } from "../../hooks/useTokenLock";
 import LockSlider from "./LockSlider";
+import TxToaster from "./TxToaster";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 //{ title, description, logo, token_name }
 function LockSwapModal({ type }: any) {
   const {
@@ -23,6 +25,9 @@ function LockSwapModal({ type }: any) {
     poolSelected,
     setPoolSelected,
     handleTXEvent,
+    txMessage,
+    load,
+    setLoad,
   }: any = useTokenLock(type);
   const { title, description, btn } = lockswapContent[type];
   const { lp_balance }: any = useUserStats();
@@ -126,10 +131,24 @@ function LockSwapModal({ type }: any) {
             handleTXEvent();
           }}
         >
-          <span className="">{btn}</span>
+          <span className="">
+            {load ? (
+              <>
+                <AiOutlineLoading3Quarters className="m-auto animate-spin" />
+              </>
+            ) : (
+              btn
+            )}
+          </span>
         </button>
       </div>
-
+      <TxToaster
+        txReady={txComplete}
+        setTxReady={setTxComplete}
+        txMessage={txMessage}
+        load={load}
+        setLoad={setLoad}
+      />
       <span>
         <LPPairsModal
           open={open}

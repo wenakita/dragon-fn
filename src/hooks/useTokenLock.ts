@@ -21,17 +21,17 @@ export function useTokenLock(type: string) {
   const [isReady, setReady] = useState(false);
   const [approve, setApprove] = useState(true);
   const [wasApproved, setWasApproved] = useState(false);
-  const [txComplete, setTxComplete] = useState({
-    completed: false,
-    message: null,
-  });
+  const [txComplete, setTxComplete] = useState(false);
+  const [txMessage, setTxMessage] = useState();
   const [poolSelected, setPoolSelected] = useState(null);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     if (approve) {
       approveTokens();
     }
   }, [approve]);
+  null;
 
   // useEffect(() => {
   //   if (isReady && tokenAmount > 0 && lockTime > 0) {
@@ -71,6 +71,8 @@ export function useTokenLock(type: string) {
     const unix_time = numericToUnix(lockTime);
     const provider = await wallets[0]?.getEthereumProvider();
     const account = await provider.request({ method: "eth_requestAccounts" });
+    setLoad(true);
+
     const lock_status: any = await createVeLock(
       tokenAmount,
       unix_time,
@@ -78,7 +80,10 @@ export function useTokenLock(type: string) {
       account[0]
     );
     console.log(`Status: ${lock_status.error}`);
-    setTxComplete(lock_status);
+    setLoad(false);
+
+    setTxMessage(lock_status);
+    setTxComplete(true);
   }
 
   async function approveTokens() {
@@ -105,11 +110,17 @@ export function useTokenLock(type: string) {
 
   async function increaseLock() {
     const { provider, account }: any = await getProvider();
+    setLoad(true);
+
     const increase_result: any = await increaseLockAmount(
       tokenAmount,
       provider,
       account[0] || null
     );
+    setTxMessage(increase_result);
+    setLoad(false);
+
+    setTxComplete(true);
   }
 
   async function getProvider() {
@@ -121,11 +132,16 @@ export function useTokenLock(type: string) {
   async function extendTime() {
     const { provider, account }: any = await getProvider();
     const unlock_time = numericToUnix(lockTime);
-    const extendResult = await extendLockTime(
+    setLoad(true);
+    const extendResult: any = await extendLockTime(
       unlock_time,
       provider,
       account[0]
     );
+    setTxMessage(extendResult);
+    setLoad(false);
+
+    setTxComplete(true);
   }
 
   async function getVotingPower() {
@@ -150,5 +166,23 @@ export function useTokenLock(type: string) {
     poolSelected,
     setPoolSelected,
     handleTXEvent,
+    txMessage,
+    load,
+    setLoad,
   };
 }
+
+//keep in mind ides for easyness
+// const [state, setState] = useState({
+//   lockTime: 0,
+//   tokenAmount: 0,
+//   votingPower: undefined,
+//   isReady: false,
+//   approve: true,
+//   wasApproved: false,
+//   txComplete: {
+//     completed: false,
+//     message: null,
+//   },
+//   poolSelected: null,
+// });

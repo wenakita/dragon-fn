@@ -1,5 +1,5 @@
 import { client } from "../config/viem_config.ts";
-import { createWalletClient, custom } from "viem";
+import { createWalletClient, custom, GetBlockNumberErrorType } from "viem";
 import { sonic } from "viem/chains";
 import { ve69_ABI } from "../config/ve69-ABI";
 import { contracts } from "./contracts/contracts.ts";
@@ -22,12 +22,18 @@ export async function createVeLock(
       args: [value, time],
     });
 
-    await walletClient.writeContract(request);
-
-    return { complete: true, message: "Tokens successfully locked!" };
+    const txHash = await walletClient.writeContract(request);
+    return {
+      complete: true,
+      message: "VE LP Created",
+      txHash,
+    };
   } catch (error) {
-    console.log(error);
-    return { complete: false, message: "No Funds!" };
+    const message = error as GetBlockNumberErrorType;
+    return {
+      complete: false,
+      message: `⚠️ Transaction Failed: ${message.name}`,
+    };
   }
 }
 
@@ -45,11 +51,20 @@ export async function increaseLockAmount(
       functionName: "increaseLockAmount",
       args: [value],
     });
-    walletClient.writeContract(request);
-    return true;
+    const txHash = await walletClient.writeContract(request);
+    console.log(`TxHash: ${txHash}`);
+    return {
+      complete: true,
+      message: `🎉 Increase Success`,
+      txHash,
+    };
   } catch (error) {
     console.log(error);
-    return false;
+    const message = error as GetBlockNumberErrorType;
+    return {
+      complete: false,
+      message: `⚠️ Transaction Failed: ${message.name}`,
+    };
   }
 }
 
@@ -68,11 +83,19 @@ export async function extendLockTime(
       functionName: "extendLockTime",
       args: [unlock_time],
     });
-    await walletClient.writeContract(request);
-    return true;
+    const txHash = await walletClient.writeContract(request);
+    return {
+      complete: true,
+      message: "🎉 Extend Successful ",
+      txHash,
+    };
   } catch (error) {
     console.log(error);
-    return false;
+    const message = error as GetBlockNumberErrorType;
+    return {
+      complete: false,
+      message: `⚠️ Transaction Failed: ${message.name}`,
+    };
   }
 }
 
