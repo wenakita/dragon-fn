@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      xxs: "140px", // min-width
+      xxs: "500px", // min-width
     },
   },
   plugins: [],

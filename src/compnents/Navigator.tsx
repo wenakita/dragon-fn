@@ -17,14 +17,21 @@ function Navigator() {
 
   return (
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
-      <span className="flex gap-3">
+      <div className="flex gap-3">
         <img src={imgUrl} alt="" className="w-[50px]" />
-
+        <div className="hidden flex gap-3 text-white text-lg font-bold items-center">
+          <h3>Dashboard</h3>
+          <h3>Lock</h3>
+          <h3>Vote</h3>
+        </div>
         {/* <h1 className="mt-auto mb-auto">Dragon</h1> */}
-      </span>
+      </div>
       {/* <ConnectWalletBtn color="green-600" /> */}
       <span className="mt-auto mb-auto flex   ">
-        <NavigatorMenu />
+        <span className="visible md:hidden">
+          <NavigatorMenu />
+        </span>
+
         <ConnectWalletBtn />
       </span>
     </div>

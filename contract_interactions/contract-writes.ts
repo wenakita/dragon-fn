@@ -31,6 +31,51 @@ export async function createVeLock(
   }
 }
 
+export async function increaseLockAmount(
+  value: any,
+  provider: any,
+  account: any
+) {
+  try {
+    const walletClient = await initializeWalletClient(provider, account);
+    const { request }: any = await client.simulateContract({
+      account,
+      address: contracts.ve69LP,
+      abi: ve69_ABI,
+      functionName: "increaseLockAmount",
+      args: [value],
+    });
+    walletClient.writeContract(request);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function extendLockTime(
+  unlock_time: any,
+  provider: any,
+  account: any
+) {
+  console.log(account);
+  try {
+    const walletClient = await initializeWalletClient(provider, account);
+    const { request }: any = await client.simulateContract({
+      account,
+      address: contracts.ve69LP,
+      abi: ve69_ABI,
+      functionName: "extendLockTime",
+      args: [unlock_time],
+    });
+    await walletClient.writeContract(request);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 export async function purchaseDragon(amount: number) {}
 
 async function sellDragon(amount: number) {}

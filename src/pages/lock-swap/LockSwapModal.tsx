@@ -22,6 +22,7 @@ function LockSwapModal({ type }: any) {
     setTxComplete,
     poolSelected,
     setPoolSelected,
+    handleTXEvent,
   }: any = useTokenLock(type);
   const { title, description, btn } = lockswapContent[type];
   const { lp_balance }: any = useUserStats();
@@ -41,84 +42,88 @@ function LockSwapModal({ type }: any) {
         {lockswapContent[type].title}{" "}
       </h1>
       <h1 className="description text-[9px] font-bold mt-2">{description}</h1>
-      <div className="mt-4 border border-[#4C5C68] bg-[#2A2B30] rounded-lg p-3">
-        <h3 className="text-xs font-bold" style={{ color: "#B0B3BA" }}>
-          From
-        </h3>
-        <div className="grid grid-cols-8 mt-2 ">
-          <span className=" col-span-3">
-            <input
-              type="tex"
-              placeholder="0"
-              className="text-xl h-full outline-0"
-            />
-          </span>
-          <span className="col-span-5 ms-auto  ">
-            <span className="flex justify-end">
-              <button
-                onClick={() => {
-                  handleModalOpen();
-                  handleOpen();
+      {type !== "extend" && (
+        <div className="mt-4 border border-[#4C5C68] bg-[#2A2B30] rounded-lg p-3">
+          <h3 className="text-xs font-bold" style={{ color: "#B0B3BA" }}>
+            From
+          </h3>
+          <div className="grid grid-cols-8 mt-2 ">
+            <span className=" col-span-3">
+              <input
+                type="tex"
+                placeholder="0"
+                className="text-xl h-full outline-0"
+                onChange={(e) => {
+                  setTokenAmount(e.target.value);
                 }}
-                className="flex justify-center border  text-sm p-0.5 rounded-md gap-3 bg-[#383941] border-[#4C5C68] p-1"
-              >
-                <div className="relative size-5.5">
-                  <img
-                    src={
-                      poolSelected
-                        ? poolSelected.logo1
-                        : "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
-                    }
-                    className="w-full h-full rounded-lg object-cover"
-                  />
-
-                  <div className="absolute bottom-1 left-[12px] rig top-2.5 size-3.5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
-                    <img
-                      src={imgUrl}
-                      alt="Badge"
-                      className="w-full h-full object-cover bg-stone-500"
-                    />
-                  </div>
-                </div>
-                <h3 className="mt-1 font-extrabold text-sm me-2">
-                  {poolSelected ? poolSelected.symbol : "DRAGON"}
-                </h3>
-              </button>
+              />
             </span>
-            <h3 className="mt-1 font-bold text-[9px] me-2">
-              Balance:{lp_balance}
-            </h3>
-          </span>
+            <span className="col-span-5 ms-auto  ">
+              <span className="flex justify-end">
+                <button
+                  onClick={() => {
+                    handleModalOpen();
+                    handleOpen();
+                  }}
+                  className="flex justify-center border  text-sm p-0.5 rounded-md gap-3 bg-[#383941] border-[#4C5C68] p-1"
+                >
+                  <div className="relative size-5.5">
+                    <img
+                      src={
+                        poolSelected
+                          ? poolSelected.logo1
+                          : "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
+                      }
+                      className="w-full h-full rounded-lg object-cover"
+                    />
+
+                    <div className="absolute bottom-1 left-[12px] rig top-2.5 size-3.5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
+                      <img
+                        src={imgUrl}
+                        alt="Badge"
+                        className="w-full h-full object-cover bg-stone-500"
+                      />
+                    </div>
+                  </div>
+                  <h3 className="mt-1 font-extrabold text-sm me-2">
+                    {poolSelected ? poolSelected.symbol : "DRAGON"}
+                  </h3>
+                </button>
+              </span>
+              <h3 className="mt-1 font-bold text-[9px] flex  justify-end">
+                Balance:{lp_balance}
+              </h3>
+            </span>
+          </div>
         </div>
-      </div>
-      <div className="p-4 flex justify-center h-14">
-        <LockSlider />
-      </div>
-      <div className="grid grid-cols-2 border rounded-lg w-90 m-auto">
-        <div className="border-r-1">
-          <h3 className="text-center">Lock Time:</h3>
-          <span className="flex justify-center gap-2">
-            <h3 className="text-center text-[30px]">26</h3>
-            <h3 className="text-center text-[10px]  mt-auto mb-2.5">days</h3>
-          </span>
-        </div>
-        <div>
-          <h3 className="text-center">Voting Power:</h3>
-        </div>
-      </div>
+      )}
+      {type == "lock" || type == "extend" ? (
+        <>
+          <div className="p-4 flex justify-center h-14">
+            <LockSlider lockTime={lockTime} setLockTime={setLockTime} />
+          </div>
+          <div className="grid grid-cols-2 border border-[#38383f] rounded-lg w-90 m-auto">
+            <div className="border-r-1 border-[#38383f] ">
+              <h3 className="text-center">Lock Time:</h3>
+              <span className="flex justify-center gap-2">
+                <h3 className="text-center text-[30px]">{lockTime}</h3>
+                <h3 className="text-center text-[10px]  mt-auto mb-2.5">
+                  days
+                </h3>
+              </span>
+            </div>
+            <div>
+              <h3 className="text-center">Voting Power:</h3>
+              <h3 className="text-center text-[30px]">{votingPower}</h3>
+            </div>
+          </div>
+        </>
+      ) : null}
       <div className="p-3  flex justify-center text-center gap-2">
         <button
           className="border w-full p-2 rounded-md bg-[#FF6B00] border-[#383941] font-extrabold mt-2 hover:bg-[#FF6B00]/70"
           onClick={() => {
-            setReady(true);
-          }}
-        >
-          <span className="">Lock Time</span>
-        </button>
-        <button
-          className="border w-full p-2 rounded-md bg-[#FF6B00] border-[#383941] font-extrabold mt-2 hover:bg-[#FF6B00]/70"
-          onClick={() => {
-            setReady(true);
+            handleTXEvent();
           }}
         >
           <span className="">{btn}</span>

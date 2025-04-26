@@ -25,10 +25,20 @@ const marks = [
   },
 ];
 
-export default function LockSlider() {
+export default function LockSlider({ lockTime, setLockTime }: any) {
+  async function getValue(e: any) {
+    setLockTime(e.target.value);
+  }
   return (
     <Box sx={{ width: "100%" }}>
-      <Slider aria-label="Always visible" defaultValue={0} step={1} />
+      <Slider
+        aria-label="Always visible"
+        defaultValue={0}
+        value={lockTime}
+        onChange={getValue}
+        step={7}
+        max={70}
+      />
     </Box>
   );
 }
