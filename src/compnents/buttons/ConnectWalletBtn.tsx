@@ -37,7 +37,8 @@ function ConnectWalletBtn({ color }: any) {
               </g>
             </svg>
             <h3 className="text-sm m-auto font-semibold p-0.5">
-              {wallets[0].address.slice(0, 6)}...{wallets[0].address.slice(-4)}
+              {wallets && wallets[0].address.slice(0, 6)}...
+              {wallets[0].address.slice(-4)}
             </h3>
           </span>
         </button>
