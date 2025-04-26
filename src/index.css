@@ -5,7 +5,25 @@
 
 :root {
   background-color: #1e1f24;
+
+
+  
 }
+
+/* 🐉 How Voting Works in Sonic Red Dragon (ve69LP system)
+You lock LP tokens (liquidity provider tokens) into a ve69LP contract.
+
+When you lock, you get voting power based on how much you lock and how long you lock it.
+
+Your voting power lets you vote on pools (liquidity pools) to control where rewards and incentives get sent.
+
+The longer you lock your LP tokens, the more voting weight you get (boosting your influence).
+
+Fee distributions, boosts, and jackpots are often redirected to the pools with the most votes.
+
+ve69LP.sol, ve69LPBoost.sol, ve69LPPoolVoting.sol, etc. handle all the locking, boosting, voting, and distribution logic. */
+
+
 /* 
 new locker swap these components
 voting power card

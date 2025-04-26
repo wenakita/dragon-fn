@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useWallets } from "@privy-io/react-auth"; // adjust if different
 
 import { numericToUnix } from "../time-helper/time-helper";
-import { calculateVotingPower } from "../../contract_interactions/contract-reads";
+import {
+  calculateVotingPower,
+  getCurrentEpochInfo,
+} from "../../contract_interactions/contract-reads";
 import {
   createVeLock,
   extendLockTime,
@@ -68,6 +71,7 @@ export function useTokenLock(type: string) {
   }
 
   async function lockLP() {
+    const epoch = await getCurrentEpochInfo();
     const unix_time = numericToUnix(lockTime);
     const provider = await wallets[0]?.getEthereumProvider();
     const account = await provider.request({ method: "eth_requestAccounts" });

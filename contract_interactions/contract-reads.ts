@@ -5,6 +5,7 @@ import { lotto_abi } from "../config/lotto_abi";
 import { contracts } from "./contracts/contracts";
 import { ve69_ABI } from "../config/ve69-ABI";
 import { LPTokenABI } from "../config/LPTokenABI.ts";
+import { ve69LPFeeDistributor } from "../config/ve69LPFeeDistributorABI.ts";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
 const jackpot_manager_ca = "";
 
@@ -113,6 +114,17 @@ export async function locked(address: string) {
   });
 
   return lock_info;
+}
+
+export async function getCurrentEpochInfo() {
+  const epoch: any = await client.readContract({
+    address: contracts.ve69LPFeeDistributor,
+    abi: ve69LPFeeDistributor,
+    functionName: "getCurrentEpochInfo",
+  });
+  console.log(epoch);
+  //index info: 0 currentEpoch rn, 1 start time of the next epoch, 2 the time left till the next epoch
+  return epoch;
 }
 
 export async function jackpotsWon(address: string) {

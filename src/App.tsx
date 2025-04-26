@@ -8,7 +8,7 @@ import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
 import LockLP from "./pages/LockLP";
 import Dashboard from "./pages/user-dashboard/Dashboard";
-import VoteMain from "./compnents/voting/VoteMain";
+import VoteMain from "./pages/voting/VoteMain";
 import TestLPLockMenu from "./pages/lock-swap/TestLPLockMenu";
 function App() {
   useEffect(() => {
