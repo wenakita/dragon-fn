@@ -13,14 +13,14 @@ function Home() {
           sustainable tokenomics model that burns and boosts with every move.
         </h3>
       </div>
-      <div className="flex justify-center gap-3 mt-5 ">
-        <button className="border p-2 rounded-md  bg-[#FFC857] w-25">
+      <div className="flex justify-center gap-3 mt-5 text-white font-bold ">
+        <button className="border p-2 rounded-md border-[#FF6B00] bg-[#FF6B00] w-25">
           <span className="flex justify-center gap-2.5">
             <FaBookOpen className="mt-1" />
             <h3>Docs</h3>
           </span>
         </button>
-        <button className="border p-2 rounded-md  bg-[#FFC857] w-25">
+        <button className="border border-[#FF6B00] p-2 rounded-md  bg-[#FF6B00] w-25">
           <span className="flex justify-center gap-2.5">
             <FaVoteYea className="mt-1" />
             <h3>Vote</h3>
