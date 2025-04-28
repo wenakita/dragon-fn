@@ -5,7 +5,7 @@ import { dragonPools } from "../../../config/dragonPools";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import VotingSlider from "./VotingSlider";
 
-function VotingModal({ setState, state }: any) {
+function VotingModal({ setState, state, partner }: any) {
   const { logo1, logo2, name } = dragonPools[0];
   const handleModalClose = () => {
     setState((prev) => ({
@@ -56,7 +56,9 @@ function VotingModal({ setState, state }: any) {
                 </div>
               </div>
               <span className="grid grid-flow-row">
-                <h3 className="mt-auto mb-auto font-extrabold">99DRAGON 1wS</h3>{" "}
+                <h3 className="mt-auto mb-auto font-extrabold">
+                  {partner && partner[1]}
+                </h3>{" "}
                 <span className="flex">
                   <a
                     href="/"
@@ -73,6 +75,20 @@ function VotingModal({ setState, state }: any) {
             <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
               Partner
             </span>
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold mt-5">Summary</h3>
+
+            <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#2A2B30]  text-white/70">
+              <span className=" rounded-md  bg-[#2A2B30] flex justify-between p-2">
+                <h3>Total votes</h3>
+                <h3>20</h3>
+              </span>
+              <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
+                <h3>Your votes</h3>
+                <h3>0</h3>
+              </span>
+            </div>
           </div>
           <div className="mt-5">
             <VotingSlider />

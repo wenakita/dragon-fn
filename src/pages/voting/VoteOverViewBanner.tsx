@@ -3,7 +3,10 @@ import { useUserStats } from "../../hooks/useUserStats";
 import VoteItem from "./VoteItem";
 import VotingTopCard from "./VotingTopCard";
 // all these will be in a sepoerate component
-function VoteOverViewBanner({ stats }) {
+function VoteOverViewBanner({ stats, state }: any) {
+  const { partners } = state;
+  console.log(partners);
+
   return (
     <div>
       <div className="grid grid-flow-col md:grid-cols-3 gap-3   rounded-lg w-90 m-auto">
@@ -18,9 +21,11 @@ function VoteOverViewBanner({ stats }) {
         </h3>
       </div>
       <div className="mt-3 border  border-[#4C5C68] rounded-lg">
-        <VoteItem />
-        <VoteItem />
-        <VoteItem />
+        {partners
+          ? partners.map((partner: any) => {
+              return <VoteItem partner={partner} />;
+            })
+          : null}
       </div>
     </div>
   );

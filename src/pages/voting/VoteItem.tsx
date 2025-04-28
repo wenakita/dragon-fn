@@ -3,7 +3,8 @@ import { dragonPools } from "../../../config/dragonPools";
 import { FaExpandAlt } from "react-icons/fa";
 import useVoting from "../../hooks/useVoting";
 import VotingModal from "./VotingModal";
-function VoteItem() {
+function VoteItem({ partner }: any) {
+  console.log(partner);
   const { logo1, logo2, name } = dragonPools[0];
   const { setState, state } = useVoting();
   const handleModalOpen = () => {
@@ -14,9 +15,9 @@ function VoteItem() {
   };
   return (
     <>
-      <div className="p-3 border  border-[#383941]  rounded-lg">
+      <div className="p-3 border  border-[#383941] bg-[#2A2B30]/70 rounded-lg">
         <div className="flex justify-between">
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <div className="relative size-9">
               {/* Main image or content */}
               <img
@@ -34,7 +35,9 @@ function VoteItem() {
                 />
               </div>
             </div>
-            <div>{name}</div>
+            <div>
+              <h3 className="font-bold mt-1.5">{partner[1]}</h3>
+            </div>
           </div>
           <div>
             <button
@@ -59,7 +62,7 @@ function VoteItem() {
           </span>
           <span></span>
         </div>
-        <VotingModal setState={setState} state={state} />
+        <VotingModal setState={setState} state={state} partner={partner} />
       </div>
     </>
   );

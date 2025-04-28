@@ -4,8 +4,10 @@ import { client } from "../config/viem_config.ts";
 import { lotto_abi } from "../config/lotto_abi";
 import { contracts } from "./contracts/contracts";
 import { ve69_ABI } from "../config/ve69-ABI";
+import { DragonPartnerRegistryABI } from "../config/DragonPartnerRegistryABI.ts";
 import { LPTokenABI } from "../config/LPTokenABI.ts";
 import { ve69LPFeeDistributor } from "../config/ve69LPFeeDistributorABI.ts";
+import { ve69LPPoolVotingABI } from "../config/ve69LPPoolVotingABI.ts";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
 const jackpot_manager_ca = "";
 
@@ -125,6 +127,74 @@ export async function getCurrentEpochInfo() {
   console.log(epoch);
   //index info: 0 currentEpoch rn, 1 start time of the next epoch, 2 the time left till the next epoch
   return epoch;
+}
+
+//gets the total amount of votes all users have important for showing which percentage has vted for what
+export async function getVotesSupply() {
+  const total_votes = client.readContract({
+    address: contracts.ve69LP,
+    abi: ve69_ABI,
+    functionName: "totalVotingPower",
+  });
+  return total_votes;
+}
+
+//gets the current period of voting important value
+export async function currentPeriod() {
+  const current_period = await client.readContract({
+    address: contracts.ve69LPPoolVoting,
+    abi: ve69LPPoolVotingABI,
+    functionName: "currentPeriod",
+  });
+  console.log(`voting Period: ${current_period}`);
+  return currentPeriod;
+}
+
+//loop through index of the mapping for partenrs
+//the final index is how much votes they have
+export async function getPartners() {
+  const partners = [];
+  const length: any = await getNextPartnerId();
+  const period = await currentPeriod();
+  for (let i = 1; i <= length - 1; i++) {
+    const current_partner: any = await client.readContract({
+      address: contracts.DragonPartnerRegistry,
+      abi: DragonPartnerRegistryABI,
+      functionName: "getPartner",
+      args: [i.toString()],
+    });
+    const current_partner_votes: any = await getPartnerVotes(
+      period.toString(),
+      i.toString()
+    );
+    current_partner.push(current_partner_votes);
+    partners.push(current_partner);
+    return partners;
+  }
+}
+
+//here we can tell the length of the partners
+async function getNextPartnerId() {
+  const nextId: any = await client.readContract({
+    address: contracts.DragonPartnerRegistry,
+    abi: DragonPartnerRegistryABI,
+    functionName: "nextPartnerId",
+  });
+  return parseInt(nextId);
+}
+
+export async function getPartnerVotes(period: any, partnerId: string) {
+  try {
+    const votes = await client.readContract({
+      address: contracts.ve69LPPoolVoting,
+      abi: ve69LPPoolVotingABI,
+      functionName: "partnerVotes",
+      args: [period, partnerId],
+    });
+    return votes;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function jackpotsWon(address: string) {

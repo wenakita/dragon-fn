@@ -1,6 +1,10 @@
 import { useWallets } from "@privy-io/react-auth";
 import { useEffect, useState } from "react";
-import { getVotingPower } from "../../contract_interactions/contract-reads";
+import {
+  currentPeriod,
+  getPartners,
+  getVotingPower,
+} from "../../contract_interactions/contract-reads";
 
 function useVoting() {
   const { wallets } = useWallets();
@@ -8,11 +12,28 @@ function useVoting() {
     open: false,
     ready: false,
     poolSelected: null,
+    partners: null,
   });
   console.log(state);
-
+  useEffect(() => {
+    getVotingPartners();
+  });
   async function vote() {
     return null;
+  }
+
+  function setPartners(refreshed_partners: any) {
+    console.log(refreshed_partners);
+    setState((prevState) => ({
+      ...prevState,
+      partners: refreshed_partners,
+    }));
+  }
+
+  //this function is very important the period value is mostly a paramerter in all functions
+  async function getVotingPartners() {
+    const currentVotingPartners: any = await getPartners();
+    setPartners(currentVotingPartners);
   }
 
   async function getProvider() {

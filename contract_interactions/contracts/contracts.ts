@@ -14,4 +14,6 @@ export const contracts: any = {
   dragonLotterySwap: "0xBb975623D78FA5092A7887A494c49a88e3021349",
   ve69LPFeeDistributor: "0x028643A8B6bdE3B65f0B5b14b1058e0ff3Eac6cE",
   wrapped_sonic: "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+  ve69LPPoolVoting: "0xB8094a7B421c58fa30e8EdF2a46d6E56B00648be",
+  DragonPartnerRegistry: "0x94b1381E5E66d825a3484128459375a0fFAdb3B2",
 };
