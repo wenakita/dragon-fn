@@ -35,8 +35,22 @@ function VoteItem({ partner }: any) {
                 />
               </div>
             </div>
-            <div>
-              <h3 className="font-bold mt-1.5">{partner[1]}</h3>
+            <div className="grid grid-flow-row">
+              <div>
+                <h3 className="font-bold ">{partner[1]}</h3>
+              </div>
+              <div className="flex gap-2">
+                <div className="">
+                  <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
+                    🤝 Partner
+                  </span>
+                </div>
+                <div className="">
+                  <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
+                    🏆 Most Votes
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
           <div>
@@ -51,7 +65,7 @@ function VoteItem({ partner }: any) {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-3 mt-3 text-[10px]">
+        <div className="grid grid-cols-3 mt-4 text-[10px]">
           <span className="">
             <h3>Total Votes</h3>
             <h3 className="text-[16px]">20</h3>

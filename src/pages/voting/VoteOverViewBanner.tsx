@@ -17,7 +17,7 @@ function VoteOverViewBanner({ stats, state }: any) {
       <div className="mt-10">
         <h3 className="text-[32px] font-semibold">Vote</h3>
         <h3 className="text-[13px] font-semibold mt-2 whitespace-nowrap">
-          Vote on your favourite gauges to direct emissions!
+          Vote for a partner to receive probability boost!
         </h3>
       </div>
       <div className="mt-3 border  border-[#4C5C68] rounded-lg">

@@ -13,6 +13,7 @@ function useVoting() {
     ready: false,
     poolSelected: null,
     partners: null,
+    votePercent: null,
   });
   console.log(state);
   useEffect(() => {
@@ -20,6 +21,10 @@ function useVoting() {
   });
   async function vote() {
     return null;
+  }
+
+  function setVotePercent(){
+    
   }
 
   function setPartners(refreshed_partners: any) {

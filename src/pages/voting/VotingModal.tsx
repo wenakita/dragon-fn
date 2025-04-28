@@ -73,7 +73,7 @@ function VotingModal({ setState, state, partner }: any) {
           </div>
           <div className="mt-3">
             <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
-              Partner
+              🤝 Partner
             </span>
           </div>
           <div>
@@ -90,8 +90,14 @@ function VotingModal({ setState, state, partner }: any) {
               </span>
             </div>
           </div>
+          {/* <div className="mt-2">
+            <div className="grid grid-cols-2 w-50">
+              <div className=" p-2 rounded-lg">hello</div>
+              <div className=" p-2 rounded-lg">hello</div>
+            </div>
+          </div> */}
           <div className="mt-5">
-            <VotingSlider />
+            <VotingSlider partner={partner} />
           </div>
           <div className="mt-5">
             <button className="border rounded-md text-center w-full p-2 font-extrabold border-[#FF6B00] bg-[#FF6B00] hover:bg-[#FF6B00]/70">
