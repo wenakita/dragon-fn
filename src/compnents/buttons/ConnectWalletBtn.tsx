@@ -47,12 +47,12 @@ function ConnectWalletBtn({ color }: any) {
       return (
         <button
           type="button"
-          className="text-white fotn-semibold text-sm font-extrabold border border-[#4C5C68] p-1.5 rounded-3xl bg-[#FF6B00]"
+          className="text-white fotn-semibold text-sm font-extrabold bg-[#FF6B00] border border-[#4C5C68] p-1.5 rounded-full text-xs px-3 mt-1.5   hover:bg-[#FF6B00]/70"
           onClick={() => {
             login();
           }}
         >
-          Log in
+          Connect Wallet
         </button>
       );
     }

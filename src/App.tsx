@@ -10,6 +10,7 @@ import LockLP from "./pages/LockLP";
 import Dashboard from "./pages/user-dashboard/Dashboard";
 import VoteMain from "./pages/voting/VoteMain";
 import TestLPLockMenu from "./pages/lock-swap/TestLPLockMenu";
+import { createTheme } from "@mui/material";
 function App() {
   useEffect(() => {
     async function test() {
@@ -18,6 +19,7 @@ function App() {
     }
     test();
   });
+
   //here lets make a single page to connect wallet every time a user triews to access dashboard or lock or vote they must go to login page
   return (
     <>
@@ -25,10 +27,10 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/lock" element={<LockLP />} />
+            <Route path="/sandbox" element={<LockLP />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vote" element={<VoteMain />} />
-            <Route path="/sandbox" element={<TestLPLockMenu />} />
+            <Route path="/lock" element={<TestLPLockMenu />} />
           </Route>
         </Routes>
       </BrowserRouter>

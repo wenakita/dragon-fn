@@ -1,11 +1,20 @@
 import React from "react";
 import { dragonPools } from "../../../config/dragonPools";
 import { FaExpandAlt } from "react-icons/fa";
+import useVoting from "../../hooks/useVoting";
+import VotingModal from "./VotingModal";
 function VoteItem() {
   const { logo1, logo2, name } = dragonPools[0];
+  const { setState, state } = useVoting();
+  const handleModalOpen = () => {
+    setState((prev) => ({
+      ...prev,
+      open: true,
+    }));
+  };
   return (
     <>
-      <div className="p-3 border  border-[#383941] border-2 rounded-lg">
+      <div className="p-3 border  border-[#383941]  rounded-lg">
         <div className="flex justify-between">
           <div className="flex gap-2">
             <div className="relative size-9">
@@ -27,8 +36,16 @@ function VoteItem() {
             </div>
             <div>{name}</div>
           </div>
-          <div className="mt-auto mb-auto border rounded-md  bg-[#FF6B00] border-[#383941]  p-2">
-            <FaExpandAlt />
+          <div>
+            <button
+              type="button"
+              className="mt-auto mb-auto border rounded-md   bg-[#FF6B00] hover:bg-[#FF6B00]/70 border-[#383941]  p-2"
+              onClick={() => {
+                handleModalOpen();
+              }}
+            >
+              <FaExpandAlt />
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-3 mt-3 text-[10px]">
@@ -42,6 +59,7 @@ function VoteItem() {
           </span>
           <span></span>
         </div>
+        <VotingModal setState={setState} state={state} />
       </div>
     </>
   );

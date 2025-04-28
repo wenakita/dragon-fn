@@ -25,7 +25,7 @@ export async function createVeLock(
     const txHash = await walletClient.writeContract(request);
     return {
       complete: true,
-      message: "VE LP Created",
+      message: "Transaction Success",
       txHash,
     };
   } catch (error) {
@@ -55,7 +55,7 @@ export async function increaseLockAmount(
     console.log(`TxHash: ${txHash}`);
     return {
       complete: true,
-      message: `🎉 Increase Success`,
+      message: `🎉 Transaction Success`,
       txHash,
     };
   } catch (error) {
@@ -86,7 +86,7 @@ export async function extendLockTime(
     const txHash = await walletClient.writeContract(request);
     return {
       complete: true,
-      message: "🎉 Extend Successful ",
+      message: "🎉 Transaction Successful ",
       txHash,
     };
   } catch (error) {
