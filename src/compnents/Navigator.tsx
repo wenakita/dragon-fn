@@ -5,6 +5,7 @@ import { FiMenu } from "react-icons/fi";
 import imgUrl from "../assets/dragon.png";
 import NavigatorMenu from "./NavigatorMenu";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
+import NavigationDrawer from "./NavigationDrawer";
 function Navigator() {
   const { wallets } = useWallets();
   const [address, setAddress] = useState<any | null>(null);
@@ -14,6 +15,10 @@ function Navigator() {
     }
   }, [wallets]);
   console.log(imgUrl);
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
 
   return (
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
@@ -29,7 +34,13 @@ function Navigator() {
       {/* <ConnectWalletBtn color="green-600" /> */}
       <span className="mt-auto mb-auto flex   ">
         <span className="visible md:hidden">
-          <NavigatorMenu />
+          {/* <NavigatorMenu /> */}
+          <NavigationDrawer
+            open={open}
+            setOpen={setOpen}
+            toggleDrawer={toggleDrawer}
+            wallets={wallets}
+          />
         </span>
 
         <ConnectWalletBtn />

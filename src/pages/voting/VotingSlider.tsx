@@ -21,8 +21,8 @@ function VotingSlider({ partner }: any) {
           }}
         />
       </span>
-      <span className="mt-3 flex justify-start gap-3 font-bold text-sm text-white/80 ">
-        <button className="border border-[#FF6B00]/50 bg-[#FF6B00]/50 p-1 px-5 rounded-lg">
+      <span className="mt-3 p-1 flex justify-start gap-3 font-bold  text-white/100 text-sm ">
+        <button className="border border-[#FF6B00]/50 bg-[#FF6B00]/90 font-extrabold p-1 px-5 rounded-lg">
           Max Votes
         </button>
       </span>

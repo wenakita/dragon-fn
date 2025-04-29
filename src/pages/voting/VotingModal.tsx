@@ -85,6 +85,10 @@ function VotingModal({ setState, state, partner }: any) {
                 <h3>20</h3>
               </span>
               <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
+                <h3>Your voting power</h3>
+                <h3>237</h3>
+              </span>
+              <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
                 <h3>Your votes</h3>
                 <h3>0</h3>
               </span>
