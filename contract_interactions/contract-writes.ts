@@ -105,14 +105,18 @@ export async function purchaseDragon(amount: number) {}
 async function sellDragon(amount: number) {}
 
 export async function vote(_partnerId: any, provider: any, account: any) {
-  const walletClient: any = initializeWalletClient(account, provider);
-  const { request }: any = client.simulateContract({
-    address: contracts.ve69LPPoolVoting,
-    abi: ve69LPPoolVotingABI,
-    functionName: "vote",
-    args: [_partnerId],
-  });
-  await walletClient.writeContract(request);
+  try {
+    const walletClient: any = initializeWalletClient(provider, account);
+    const { request }: any = client.simulateContract({
+      address: contracts.ve69LPPoolVoting,
+      abi: ve69LPPoolVotingABI,
+      functionName: "vote",
+      args: [_partnerId],
+    });
+    await walletClient.writeContract(request);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //the provider is what we use to use viem with privy

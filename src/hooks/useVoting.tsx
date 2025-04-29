@@ -1,4 +1,4 @@
-import { useWallets } from "@privy-io/react-auth";
+import { PrivyProvider, useWallets } from "@privy-io/react-auth";
 import { useEffect, useState } from "react";
 import {
   currentPeriod,
@@ -22,11 +22,10 @@ function useVoting() {
   //
   // });
 
+  //voting write function works now the problem was u had to add lp u dont get tokens for making the pool
+
   useEffect(() => {
     getVotingPartners();
-    setTimeout(() => {
-      initiateVote();
-    }, 10000);
   }, []);
 
   function setVotePercent() {}
@@ -45,15 +44,20 @@ function useVoting() {
     setPartners(currentVotingPartners);
   }
 
+  //accounts is the array of wallets we can just use wallets from useWallets()
+
   async function initiateVote() {
-    const { provider, account }: any = await getProvider();
+    const provider: any = await wallets[0]?.getEthereumProvider();
+    // const account: any = await provider.request({
+    //   method: "eth_requestAccounts",
+    // });
+    const account = wallets;
     await vote("1", provider, account);
   }
 
   async function getProvider() {
     const provider = await wallets[0]?.getEthereumProvider();
-    const account = await provider.request({ method: "eth_requestAccounts" });
-    return { provider, account };
+    return { provider };
   }
 
   return { setState, state };

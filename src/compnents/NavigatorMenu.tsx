@@ -5,7 +5,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { FiMenu } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router";
+import { useSendTransaction } from "@privy-io/react-auth";
 function NavigatorMenu() {
+  const { sendTransaction }: any = useSendTransaction();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
