@@ -3,6 +3,7 @@ import { createWalletClient, custom, GetBlockNumberErrorType } from "viem";
 import { sonic } from "viem/chains";
 import { ve69_ABI } from "../config/ve69-ABI";
 import { contracts } from "./contracts/contracts.ts";
+import { ve69LPPoolVotingABI } from "../config/ve69LPPoolVotingABI.ts";
 const MAX_ALLOWANCE = 1000000;
 
 export async function createVeLock(
@@ -102,6 +103,17 @@ export async function extendLockTime(
 export async function purchaseDragon(amount: number) {}
 
 async function sellDragon(amount: number) {}
+
+export async function vote(_partnerId: any, provider: any, account: any) {
+  const walletClient: any = initializeWalletClient(account, provider);
+  const { request }: any = client.simulateContract({
+    address: contracts.ve69LPPoolVoting,
+    abi: ve69LPPoolVotingABI,
+    functionName: "vote",
+    args: [_partnerId],
+  });
+  await walletClient.writeContract(request);
+}
 
 //the provider is what we use to use viem with privy
 //ex: const provider = await embeddedWallet.getEthereumProvider();

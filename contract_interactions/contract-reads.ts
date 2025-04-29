@@ -183,7 +183,7 @@ async function getNextPartnerId() {
   return parseInt(nextId);
 }
 
-export async function getPartnerVotes(period: any, partnerId: string) {
+async function getPartnerVotes(period: any, partnerId: string) {
   try {
     const votes = await client.readContract({
       address: contracts.ve69LPPoolVoting,

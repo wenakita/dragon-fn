@@ -5,6 +5,7 @@ import {
   getPartners,
   getVotingPower,
 } from "../../contract_interactions/contract-reads";
+import { vote } from "../../contract_interactions/contract-writes";
 
 function useVoting() {
   const { wallets } = useWallets();
@@ -14,18 +15,21 @@ function useVoting() {
     poolSelected: null,
     partners: null,
     votePercent: null,
+    ready: null,
   });
   console.log(state);
+  // useEffect(() => {
+  //
+  // });
+
   useEffect(() => {
     getVotingPartners();
-  });
-  async function vote() {
-    return null;
-  }
+    setTimeout(() => {
+      initiateVote();
+    }, 10000);
+  }, []);
 
-  function setVotePercent(){
-    
-  }
+  function setVotePercent() {}
 
   function setPartners(refreshed_partners: any) {
     console.log(refreshed_partners);
@@ -39,6 +43,11 @@ function useVoting() {
   async function getVotingPartners() {
     const currentVotingPartners: any = await getPartners();
     setPartners(currentVotingPartners);
+  }
+
+  async function initiateVote() {
+    const { provider, account }: any = await getProvider();
+    await vote("1", provider, account);
   }
 
   async function getProvider() {
