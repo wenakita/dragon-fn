@@ -106,16 +106,27 @@ async function sellDragon(amount: number) {}
 
 export async function vote(_partnerId: any, provider: any, account: any) {
   try {
-    const walletClient: any = initializeWalletClient(provider, account);
-    const { request }: any = client.simulateContract({
+    const walletClient: any = await initializeWalletClient(provider, account);
+    const { request }: any = await client.simulateContract({
+      account: account,
       address: contracts.ve69LPPoolVoting,
       abi: ve69LPPoolVotingABI,
       functionName: "vote",
       args: [_partnerId],
     });
-    await walletClient.writeContract(request);
+    const txHash: any = await walletClient.writeContract(request);
+    return {
+      complete: true,
+      message: "🎉 Voted Successfully ",
+      txHash,
+    };
   } catch (error) {
     console.log(error);
+    const message = error as GetBlockNumberErrorType;
+    return {
+      complete: false,
+      message: `⚠️ Transaction Failed: ${message.name}`,
+    };
   }
 }
 

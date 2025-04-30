@@ -3,7 +3,7 @@ import { dragonPools } from "../../../config/dragonPools";
 import { FaExpandAlt } from "react-icons/fa";
 import useVoting from "../../hooks/useVoting";
 import VotingModal from "./VotingModal";
-function VoteItem({ partner }: any) {
+function VoteItem({ partner, votingPower, vote_amount }: any) {
   console.log(partner);
   const { logo1, logo2, name } = dragonPools[0];
   const { setState, state } = useVoting();
@@ -76,7 +76,13 @@ function VoteItem({ partner }: any) {
           </span>
           <span></span>
         </div>
-        <VotingModal setState={setState} state={state} partner={partner} />
+        <VotingModal
+          setState={setState}
+          state={state}
+          partner={partner}
+          votingPower={votingPower}
+          vote_amount={vote_amount}
+        />
       </div>
     </>
   );

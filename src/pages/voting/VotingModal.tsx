@@ -4,15 +4,24 @@ import useVoting from "../../hooks/useVoting";
 import { dragonPools } from "../../../config/dragonPools";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import VotingSlider from "./VotingSlider";
+import TxToasterVoting from "./TxToasterVoting";
 
-function VotingModal({ setState, state, partner }: any) {
+function VotingModal({
+  setState,
+  state,
+  partner,
+  votingPower,
+  vote_amount,
+}: any) {
+  console.log(partner);
   const { logo1, logo2, name } = dragonPools[0];
   const handleModalClose = () => {
-    setState((prev) => ({
+    setState((prev: any) => ({
       ...prev,
       open: false,
     }));
   };
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -86,11 +95,11 @@ function VotingModal({ setState, state, partner }: any) {
               </span>
               <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
                 <h3>Your voting power</h3>
-                <h3>237</h3>
+                <h3>{votingPower}</h3>
               </span>
               <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
                 <h3>Your votes</h3>
-                <h3>0</h3>
+                <h3>{vote_amount}</h3>
               </span>
             </div>
           </div>
@@ -101,14 +110,24 @@ function VotingModal({ setState, state, partner }: any) {
             </div>
           </div> */}
           <div className="mt-5">
-            <VotingSlider partner={partner} />
+            <VotingSlider partner={partner} state={state} setState={setState} />
           </div>
           <div className="mt-5">
-            <button className="border rounded-md text-center w-full p-2 font-extrabold border-[#FF6B00] bg-[#FF6B00] hover:bg-[#FF6B00]/70">
+            <button
+              className="border rounded-md text-center w-full p-2 font-extrabold border-[#FF6B00] bg-[#FF6B00] hover:bg-[#FF6B00]/70"
+              onClick={() => {
+                setState((prev: any) => ({
+                  ...prev,
+                  ready: true,
+                  partnerSelection: partner[partner.length - 2],
+                }));
+              }}
+            >
               Vote
             </button>
           </div>
         </div>
+        <TxToasterVoting state={state} setState={setState} />
       </Box>
     </Modal>
   );

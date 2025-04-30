@@ -8,6 +8,7 @@ import {
 import { vote } from "../../contract_interactions/contract-writes";
 
 function useVoting() {
+  const [amount, setAmount] = useState(0);
   const { wallets } = useWallets();
   const [state, setState] = useState({
     open: false,
@@ -15,7 +16,10 @@ function useVoting() {
     poolSelected: null,
     partners: null,
     votePercent: null,
-    ready: null,
+    amount: 0,
+    partnerSelection: null,
+    txComplete: null,
+    txMessage: null,
   });
   console.log(state);
   // useEffect(() => {
@@ -27,6 +31,18 @@ function useVoting() {
   useEffect(() => {
     getVotingPartners();
   }, []);
+
+  useEffect(() => {
+    console.log("changed ", state.ready);
+    if (state.ready && state.partnerSelection !== null) {
+      initiateVote();
+    }
+  }, [state.ready]);
+
+  useEffect(() => {
+    console.log("slider changed");
+    console.log(amount);
+  }, [state.amount]);
 
   function setVotePercent() {}
 
@@ -48,11 +64,29 @@ function useVoting() {
 
   async function initiateVote() {
     const provider: any = await wallets[0]?.getEthereumProvider();
-    // const account: any = await provider.request({
-    //   method: "eth_requestAccounts",
-    // });
-    const account = wallets;
-    await vote("1", provider, account);
+    const account: any = await provider.request({
+      method: "eth_requestAccounts",
+    });
+    const response = await vote(state.partnerSelection, provider, account[0]);
+    setTxMessage(response);
+
+    setReady(false);
+  }
+
+  function setReady(newValue: any) {
+    setState((prev) => ({
+      ...prev,
+      ready: newValue,
+      partnerSelection: null,
+    }));
+  }
+
+  function setTxMessage(newValue: any) {
+    setState((prev) => ({
+      ...prev,
+      txComplete: true,
+      txMessage: newValue,
+    }));
   }
 
   async function getProvider() {

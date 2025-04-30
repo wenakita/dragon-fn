@@ -8,6 +8,7 @@ import { DragonPartnerRegistryABI } from "../config/DragonPartnerRegistryABI.ts"
 import { LPTokenABI } from "../config/LPTokenABI.ts";
 import { ve69LPFeeDistributor } from "../config/ve69LPFeeDistributorABI.ts";
 import { ve69LPPoolVotingABI } from "../config/ve69LPPoolVotingABI.ts";
+import { DragonTokenABI } from "../config/DragonTokenABI.ts";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
 const jackpot_manager_ca = "";
 
@@ -150,7 +151,32 @@ export async function currentPeriod() {
   return currentPeriod;
 }
 
+export async function getBalance(address: any) {
+  const abi_selected = await detectAddress(address);
+  const balance: any = await client.readContract({
+    address,
+    abi: abi_selected,
+    functionName: "balanceOf",
+  });
+  return balance;
+}
+
+function detectAddress(address: any) {
+  switch (address) {
+    case contracts.dragon:
+      return DragonTokenABI;
+      break;
+    case contracts.lpToken:
+      return LPTokenABI;
+      break;
+    default:
+      return DragonTokenABI;
+      break;
+  }
+}
+
 //loop through index of the mapping for partenrs
+//second to last index is the id
 //the final index is how much votes they have
 export async function getPartners() {
   const partners = [];
@@ -167,7 +193,9 @@ export async function getPartners() {
       period.toString(),
       i.toString()
     );
+    current_partner.push(i);
     current_partner.push(current_partner_votes);
+    console.log(current_partner);
     partners.push(current_partner);
     return partners;
   }

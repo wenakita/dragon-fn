@@ -1,11 +1,5 @@
-import React from 'react'
+import React from "react";
 
-import {useWal}
-function UseDragon() {
-const {wallets} = useWallets()
-    return (
-        
-    )
-}
+function UseDragon() {}
 
-export default UseDragon
+export default UseDragon;

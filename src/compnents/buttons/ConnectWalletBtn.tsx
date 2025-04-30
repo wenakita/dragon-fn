@@ -1,14 +1,29 @@
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import useWalletStatus from "../../hooks/useWallletStatus";
+import { useState } from "react";
+import NavigationDrawer from "../NavigationDrawer";
 function ConnectWalletBtn({ color }: any) {
   const { login, logout } = usePrivy();
   const { wallets } = useWallets();
   const isLoggedIn = useWalletStatus();
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
 
   function CheckElement() {
     console.log(`is logged in? : ${isLoggedIn}`);
     if (isLoggedIn) {
-      return null;
+      return (
+        <>
+          <NavigationDrawer
+            open={open}
+            setOpen={setOpen}
+            toggleDrawer={toggleDrawer}
+            wallets={wallets}
+          />
+        </>
+      );
     } else {
       return (
         <button

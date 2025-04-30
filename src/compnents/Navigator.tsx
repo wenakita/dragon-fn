@@ -33,15 +33,7 @@ function Navigator() {
       </div>
       {/* <ConnectWalletBtn color="green-600" /> */}
       <span className="mt-auto mb-auto flex   ">
-        <span className="visible md:hidden">
-          {/* <NavigatorMenu /> */}
-          <NavigationDrawer
-            open={open}
-            setOpen={setOpen}
-            toggleDrawer={toggleDrawer}
-            wallets={wallets}
-          />
-        </span>
+        <span className="visible md:hidden">{/* <NavigatorMenu /> */}</span>
 
         <ConnectWalletBtn />
       </span>
