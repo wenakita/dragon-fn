@@ -10,6 +10,8 @@ import { ve69LPFeeDistributor } from "../config/ve69LPFeeDistributorABI.ts";
 import { ve69LPPoolVotingABI } from "../config/ve69LPPoolVotingABI.ts";
 import { DragonTokenABI } from "../config/DragonTokenABI.ts";
 const main_lotto_ca = "0x4Ad7107F4C638c01ad4eAD39d035626F05727e41";
+
+import { formatUnits } from "viem";
 const jackpot_manager_ca = "";
 
 export async function get_game_config() {
@@ -151,28 +153,35 @@ export async function currentPeriod() {
   return currentPeriod;
 }
 
-export async function getBalance(address: any) {
-  const abi_selected = await detectAddress(address);
+export async function getDragonBalance(wallet: any) {
   const balance: any = await client.readContract({
-    address,
-    abi: abi_selected,
+    address: contracts.dragon,
+    abi: DragonTokenABI,
     functionName: "balanceOf",
+    args: [wallet],
   });
-  return balance;
+
+  return formatUnits(balance, 18) || null;
+}
+export async function getLpTokenBalance(wallet: any) {
+  const balance: any = await client.readContract({
+    address: contracts.lpToken,
+    abi: LPTokenABI,
+    functionName: "balanceOf",
+    args: [wallet],
+  });
+  return formatUnits(balance, 18) || null;
 }
 
-function detectAddress(address: any) {
-  switch (address) {
-    case contracts.dragon:
-      return DragonTokenABI;
-      break;
-    case contracts.lpToken:
-      return LPTokenABI;
-      break;
-    default:
-      return DragonTokenABI;
-      break;
-  }
+//gets full lock details
+export async function getlock(_user: any) {
+  const lock_info: any = await client.readContract({
+    address: contracts.ve69LP,
+    abi: ve69_ABI,
+    functionName: "getLock",
+    args: [_user],
+  });
+  return lock_info;
 }
 
 //loop through index of the mapping for partenrs

@@ -9,3 +9,10 @@ function addDays(date: any, days: number) {
   newDate.setDate(date.getDate() + days);
   return Math.floor(newDate / 1000);
 }
+
+export function unixToNumeric(timestamp: any) {
+  const unix = BigInt(timestamp);
+  const date = new Date(Number(unix) * 1000);
+  console.log(date.toLocaleString());
+  return date.toLocaleString();
+}

@@ -6,7 +6,9 @@ import imgUrl from "../assets/dragon.png";
 import NavigatorMenu from "./NavigatorMenu";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 import NavigationDrawer from "./NavigationDrawer";
+import useBalances from "../hooks/useBalances";
 function Navigator() {
+  const { balances } = useBalances();
   const { wallets } = useWallets();
   const [address, setAddress] = useState<any | null>(null);
   useEffect(() => {
