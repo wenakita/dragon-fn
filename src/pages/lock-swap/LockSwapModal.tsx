@@ -7,6 +7,7 @@ import { useTokenLock } from "../../hooks/useTokenLock";
 import LockSlider from "./LockSlider";
 import TxToaster from "./TxToaster";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { dragonPools } from "../../../config/dragonPools";
 //{ title, description, logo, token_name }
 function LockSwapModal({ type }: any) {
   const {
@@ -32,7 +33,7 @@ function LockSwapModal({ type }: any) {
   const { title, description, btn } = lockswapContent[type];
   const { lp_balance }: any = useUserStats();
   const [open, setOpen] = useState(false);
-
+  const { logo1, logo2, name } = dragonPools[0];
   useEffect(() => {
     handleClose();
   }, [poolSelected]);
@@ -74,17 +75,13 @@ function LockSwapModal({ type }: any) {
                 >
                   <div className="relative size-5.5">
                     <img
-                      src={
-                        poolSelected
-                          ? poolSelected.logo1
-                          : "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
-                      }
-                      className="w-full h-full rounded-lg object-cover"
+                      src={logo2}
+                      className="w-full h-full rounded-full object-cover"
                     />
 
                     <div className="absolute bottom-1 left-[12px] rig top-2.5 size-3.5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
                       <img
-                        src={imgUrl}
+                        src={logo1}
                         alt="Badge"
                         className="w-full h-full object-cover bg-stone-500"
                       />

@@ -14,15 +14,15 @@ function PoolPairItem({ pool, setPoolSelected }: any) {
         <div className="relative size-9">
           {/* Main image or content */}
           <img
-            src={logo1}
+            src={logo2}
             alt={logo1}
-            className="w-full h-full rounded-lg object-cover"
+            className="w-full h-full rounded-full object-cover"
           />
 
           {/* Badge in bottom-right */}
           <div className="absolute bottom-1 left-5 rig top-4.5 size-5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
             <img
-              src={logo2}
+              src={logo1}
               alt="Badge"
               className="w-full h-full object-cover bg-stone-500"
             />
