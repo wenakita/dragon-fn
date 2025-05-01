@@ -37,99 +37,105 @@ function VotingModal({
     p: 3,
   };
   return (
-    <Modal
-      open={state.open}
-      onClose={handleModalClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <div>
-          <div className="flex justify-between">
-            <span className="flex gap-2  w-full">
-              <div className="relative size-9">
-                {/* Main image or content */}
-                <img
-                  src={logo1}
-                  alt={logo1}
-                  className="w-full h-full rounded-lg object-cover"
-                />
-
-                {/* Badge in bottom-right */}
-                <div className="absolute bottom-1 left-5 rig top-4.5 size-5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
+    <>
+      <Modal
+        open={state.open}
+        onClose={handleModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div>
+            <div className="flex justify-between">
+              <span className="flex gap-2  w-full">
+                <div className="relative size-9">
+                  {/* Main image or content */}
                   <img
-                    src={logo2}
-                    alt="Badge"
-                    className="w-full h-full object-cover bg-stone-500"
+                    src={logo1}
+                    alt={logo1}
+                    className="w-full h-full rounded-lg object-cover"
                   />
+
+                  {/* Badge in bottom-right */}
+                  <div className="absolute bottom-1 left-5 rig top-4.5 size-5 rounded-md border-2 border-[#4C5C68] bg-[#4C5C68] overflow-hidden">
+                    <img
+                      src={logo2}
+                      alt="Badge"
+                      className="w-full h-full object-cover bg-stone-500"
+                    />
+                  </div>
                 </div>
-              </div>
-              <span className="grid grid-flow-row">
-                <h3 className="mt-auto mb-auto font-extrabold">
-                  {partner && partner[1]}
-                </h3>{" "}
-                <span className="flex">
-                  <a
-                    href="/"
-                    className="mt-auto mb-auto font-bold hover:underline text-xs ms-1 text-[#e07d35]"
-                  >
-                    View Partner
-                  </a>
-                  <MdOutlineArrowOutward className="text-[#e07d35] text-xs mt-auto mb-auto" />
+                <span className="grid grid-flow-row">
+                  <h3 className="mt-auto mb-auto font-extrabold">
+                    {partner && partner[1]}
+                  </h3>{" "}
+                  <span className="flex">
+                    <a
+                      href="/"
+                      className="mt-auto mb-auto font-bold hover:underline text-xs ms-1 text-[#e07d35]"
+                    >
+                      View Partner
+                    </a>
+                    <MdOutlineArrowOutward className="text-[#e07d35] text-xs mt-auto mb-auto" />
+                  </span>
                 </span>
               </span>
-            </span>
-          </div>
-          <div className="mt-3">
-            <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
-              🤝 Partner
-            </span>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mt-5">Summary</h3>
-
-            <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#2A2B30]  text-white/70">
-              <span className=" rounded-md  bg-[#2A2B30] flex justify-between p-2">
-                <h3>Total votes</h3>
-                <h3>20</h3>
-              </span>
-              <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
-                <h3>Your voting power</h3>
-                <h3>{votingPower}</h3>
-              </span>
-              <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
-                <h3>Your votes</h3>
-                <h3>{vote_amount}</h3>
+            </div>
+            <div className="mt-3">
+              <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
+                🤝 Partner
               </span>
             </div>
-          </div>
-          {/* <div className="mt-2">
+            <div>
+              <h3 className="text-2xl font-bold mt-5">Summary</h3>
+
+              <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#2A2B30]  text-white/70">
+                <span className=" rounded-md  bg-[#2A2B30] flex justify-between p-2">
+                  <h3>Total votes</h3>
+                  <h3>20</h3>
+                </span>
+                <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
+                  <h3>Your voting power</h3>
+                  <h3>{votingPower}</h3>
+                </span>
+                <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
+                  <h3>Your votes</h3>
+                  <h3>{vote_amount}</h3>
+                </span>
+              </div>
+            </div>
+            {/* <div className="mt-2">
             <div className="grid grid-cols-2 w-50">
               <div className=" p-2 rounded-lg">hello</div>
               <div className=" p-2 rounded-lg">hello</div>
             </div>
           </div> */}
-          <div className="mt-5">
-            <VotingSlider partner={partner} state={state} setState={setState} />
+            <div className="mt-5">
+              <VotingSlider
+                partner={partner}
+                state={state}
+                setState={setState}
+              />
+            </div>
+            <div className="mt-5">
+              <button
+                className="border rounded-md text-center w-full p-2 font-extrabold border-[#FF6B00] bg-[#FF6B00] hover:bg-[#FF6B00]/70"
+                onClick={() => {
+                  setState((prev: any) => ({
+                    ...prev,
+                    ready: true,
+                    partnerSelection: partner[partner.length - 2],
+                  }));
+                }}
+              >
+                Vote
+              </button>
+            </div>
           </div>
-          <div className="mt-5">
-            <button
-              className="border rounded-md text-center w-full p-2 font-extrabold border-[#FF6B00] bg-[#FF6B00] hover:bg-[#FF6B00]/70"
-              onClick={() => {
-                setState((prev: any) => ({
-                  ...prev,
-                  ready: true,
-                  partnerSelection: partner[partner.length - 2],
-                }));
-              }}
-            >
-              Vote
-            </button>
-          </div>
-        </div>
-        <TxToasterVoting state={state} setState={setState} />
-      </Box>
-    </Modal>
+        </Box>
+      </Modal>
+      <TxToasterVoting state={state} setState={setState} />
+    </>
   );
 }
 

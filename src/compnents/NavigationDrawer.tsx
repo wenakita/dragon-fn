@@ -1,13 +1,20 @@
 import { Button, Drawer } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import WalletIcon from "./icons/WalletIcon";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { FaPowerOff, FaWallet } from "react-icons/fa";
 import NavigatorDrawerTabs from "./NavigatorDrawerTabs";
+import TabDetector from "./TabDetecter";
+import useBalances from "../hooks/useBalances";
 
 function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   const { logout } = usePrivy();
+  const balances = useBalances();
   const tokens = [];
+  const [tab, setTab] = useState("tokens");
+  const handleTabChange = (newValue: any) => {
+    setTab(newValue);
+  };
   return (
     <div className="">
       <button
@@ -74,16 +81,10 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
             </span>
           </div>
           <div className="mt-5">
-            <NavigatorDrawerTabs />
+            <NavigatorDrawerTabs tab={tab} handleTabChange={handleTabChange} />
           </div>
-          <div className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc">
-            <span>
-              <FaWallet className="text-[50px] text-white/50 m-auto" />
-              <h3 className="font-bold mt-3">No Tokens Yet</h3>
-              <h3 className="text-white/70 ">
-                Buy or transfer tokens to this wallet to get started.
-              </h3>
-            </span>
+          <div className="p-4">
+            <TabDetector type={tab} balances={balances} />
           </div>
           <div className="mt-5">
             <button className="border w-full text-center p-2 rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">

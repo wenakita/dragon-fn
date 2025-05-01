@@ -18,7 +18,11 @@ function useBalances() {
     if (wallets[0]) {
       findBalances();
     }
-  }, []);
+  }, [wallets]);
+
+  useEffect(() => {
+    console.log(balances);
+  }, [balances]);
 
   async function findBalances() {
     const { address }: any = wallets[0];
@@ -31,7 +35,20 @@ function useBalances() {
     lockInfo[1] = unixToNumeric(tempDate);
     console.log(`Lock Info: ${lockInfo}`);
     //lock amount index zero is lock amount , index 1 is lock time shows full date
-    setBalances({ dragon, lp, votingPower, lockInfo });
+    console.log(lockInfo);
+    setBalances({
+      tokens: {
+        dragon: { balance: dragon, logo: "/src/assets/dragon.png" },
+        lp: {
+          balance: lp,
+          logo: "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png",
+        },
+      },
+      votingPower: {
+        balance: votingPower,
+      },
+      lockInfo,
+    });
   }
 
   return balances;
