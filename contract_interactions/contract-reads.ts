@@ -144,13 +144,14 @@ export async function getVotesSupply() {
 
 //gets the current period of voting important value
 export async function currentPeriod() {
-  const current_period = await client.readContract({
+  const current_period: any = await client.readContract({
     address: contracts.ve69LPPoolVoting,
     abi: ve69LPPoolVotingABI,
     functionName: "currentPeriod",
+    args: [],
   });
   console.log(`voting Period: ${current_period}`);
-  return currentPeriod;
+  return current_period;
 }
 
 export async function getDragonBalance(wallet: any) {
@@ -174,14 +175,25 @@ export async function getLpTokenBalance(wallet: any) {
 }
 
 //gets full lock details
-export async function getlock(_user: any) {
+export async function getlock(_wallet: any) {
   const lock_info: any = await client.readContract({
     address: contracts.ve69LP,
     abi: ve69_ABI,
     functionName: "getLock",
-    args: [_user],
+    args: [_wallet],
   });
   return lock_info;
+}
+
+export async function userVotes(_period: any, wallet: any, _partnerId: any) {
+  const votes = await client.readContract({
+    address: contracts.ve69LPPoolVoting,
+    abi: ve69LPPoolVotingABI,
+    functionName: "userVotes",
+    args: [_period, wallet, _partnerId],
+  });
+  console.log(`Votes: ${votes}`);
+  return votes;
 }
 
 //loop through index of the mapping for partenrs
@@ -191,13 +203,16 @@ export async function getPartners() {
   const partners = [];
   const length: any = await getNextPartnerId();
   const period = await currentPeriod();
-  for (let i = 1; i <= length - 1; i++) {
+  console.log(`Next Partner: ${length}`);
+  for (let i = 1; i < length; i++) {
+    console.log(`I: ${i}`);
     const current_partner: any = await client.readContract({
       address: contracts.DragonPartnerRegistry,
       abi: DragonPartnerRegistryABI,
       functionName: "getPartner",
       args: [i.toString()],
     });
+    console.log(current_partner);
     const current_partner_votes: any = await getPartnerVotes(
       period.toString(),
       i.toString()
@@ -206,8 +221,8 @@ export async function getPartners() {
     current_partner.push(current_partner_votes);
     console.log(current_partner);
     partners.push(current_partner);
-    return partners;
   }
+  return partners;
 }
 
 //here we can tell the length of the partners

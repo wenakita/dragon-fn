@@ -5,13 +5,17 @@ import {
   getlock,
   getLpTokenBalance,
   getVotingPower,
+  userVotes,
 } from "../../contract_interactions/contract-reads";
 import { useWallets } from "@privy-io/react-auth";
 import { unixToNumeric } from "../time-helper/time-helper";
 import { setBalance } from "viem/actions";
+import useVoting from "./useVoting";
 
 function useBalances() {
   const { wallets } = useWallets();
+  const { state } = useVoting();
+  console.log(state);
   const [balances, setBalances] = useState<any | null>({});
 
   useEffect(() => {
@@ -31,6 +35,7 @@ function useBalances() {
     const lp: any = await getLpTokenBalance(address);
     const votingPower: any = await getVotingPower(address);
     const lockInfo: any = await getlock(address);
+    const info = await getUserVoteInfo();
     const tempDate: any = lockInfo[1];
     lockInfo[1] = unixToNumeric(tempDate);
     console.log(`Lock Info: ${lockInfo}`);
@@ -49,6 +54,23 @@ function useBalances() {
       },
       lockInfo,
     });
+  }
+
+  async function getUserVoteInfo() {
+    const { partners, period }: any = state;
+    const votes = [];
+
+    if (state.partners && wallets[0]) {
+      for (let i = 0; i < partners.length; i++) {
+        const current: any = state.partners[i];
+        const votes = await userVotes(
+          period,
+          wallets[0].address,
+          current[current.length - 2]
+        );
+        console.log(`votes for ${i}, ${current[current.length - 2]}`);
+      }
+    }
   }
 
   return balances;

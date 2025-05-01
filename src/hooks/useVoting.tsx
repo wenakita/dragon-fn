@@ -30,6 +30,7 @@ function useVoting() {
 
   useEffect(() => {
     getVotingPartners();
+    getPeriod();
   }, []);
 
   useEffect(() => {
@@ -54,10 +55,23 @@ function useVoting() {
     }));
   }
 
+  function setPeriod(period: any) {
+    console.log(period);
+    setState((prevState) => ({
+      ...prevState,
+      period: period,
+    }));
+  }
+
   //this function is very important the period value is mostly a paramerter in all functions
   async function getVotingPartners() {
     const currentVotingPartners: any = await getPartners();
     setPartners(currentVotingPartners);
+  }
+
+  async function getPeriod() {
+    const period: any = await currentPeriod();
+    setPeriod(period);
   }
 
   //accounts is the array of wallets we can just use wallets from useWallets()

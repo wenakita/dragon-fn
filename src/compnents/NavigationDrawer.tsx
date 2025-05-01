@@ -58,18 +58,31 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
                 {wallets[0] && wallets[0].address.slice(0, 6)}...
                 {wallets[0] && wallets[0].address.slice(-4)}
               </h3>
-              <span className="flex gap-1 mt-1 ">
-                <img
-                  src="https://static.debank.com/image/user/official_avatar/7706/60882bcdfbe1db996c219aa56e4d5a83.png"
-                  alt=""
-                  className="size-4.5 border rounded-md"
-                />
-                <img
-                  src="https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
-                  alt=""
-                  className="size-4.5"
-                />
-              </span>
+              <div className="flex gap-1 mt-1 ">
+                <a
+                  href={
+                    wallets[0]
+                      ? `https://debank.com/profile/${wallets[0].address}`
+                      : "https://static.debank.com/image/user/official_avatar/7706/60882bcdfbe1db996c219aa56e4d5a83.png"
+                  }
+                  target="_blank"
+                  className=""
+                >
+                  <img
+                    src="https://static.debank.com/image/user/official_avatar/7706/60882bcdfbe1db996c219aa56e4d5a83.png"
+                    alt=""
+                    className="size-5 border rounded-md "
+                  />
+                </a>
+
+                <a href="https://debank.com/profile/" target="_blank">
+                  <img
+                    src="https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
+                    alt=""
+                    className="size-4.5"
+                  />
+                </a>
+              </div>
             </span>
             <span
               className=" "
