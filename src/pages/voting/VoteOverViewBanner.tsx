@@ -21,7 +21,7 @@ function VoteOverViewBanner({ stats, state }: any) {
             Vote for a partner to receive probability boost!
           </h3>
         </div>
-        <div className="mt-5 border w-100 md:w-150 border-[#4C5C68] rounded-lg">
+        <div className="mt-5 grid grid-flow-row  border w-100 md:w-150 border-[#4C5C68] rounded-lg">
           {partners
             ? partners.map((partner: any) => {
                 return (

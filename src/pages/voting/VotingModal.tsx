@@ -81,24 +81,30 @@ function VotingModal({
                 </span>
               </span>
             </div>
-            <div className="mt-3">
+            <div className="mt-3 flex gap-3">
               <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
                 🤝 Partner
-              </span>
+              </span>{" "}
+              {partner[partner.length - 3] > 0 && (
+                <span className="text-[#f88736] border border-[#FF6B00] bg-[#FF6B00]/20 font-bold text-xs px-2 rounded-2xl">
+                  🚀 {partner[partner.length - 3]}% boost
+                </span>
+              )}
             </div>
             <div>
               <h3 className="text-2xl font-bold mt-5">Summary</h3>
 
               <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#2A2B30]  text-white/70">
-                <span className=" rounded-md  bg-[#2A2B30] flex justify-between p-2">
+                <span className="border-dashed  border-[#4C5C68]  flex justify-between p-2">
+                  <h3>Fees Earned</h3>
+                  <h3>{partner[partner.length - 4]}</h3>
+                </span>
+                <span className="border-t-1 border-dashed    border-[#4C5C68] flex justify-between p-2">
                   <h3>Total votes</h3>
-                  <h3>20</h3>
+                  <h3>{partner[partner.length - 1]}</h3>
                 </span>
-                <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
-                  <h3>Your voting power</h3>
-                  <h3>{votingPower}</h3>
-                </span>
-                <span className="border-t-1 border-dashed  border-[#4C5C68]  flex justify-between p-2">
+
+                <span className="border-t-1 border-dashed     border-[#4C5C68] flex justify-between p-2">
                   <h3>Your votes</h3>
                   <h3>{vote_amount}</h3>
                 </span>

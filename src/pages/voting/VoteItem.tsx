@@ -72,7 +72,7 @@ function VoteItem({ partner, votingPower, vote_amount }: any) {
           </span>
           <span className="">
             <h3>Your Votes</h3>
-            <h3 className="text-[16px]">100k</h3>
+            <h3 className="text-[16px]">{vote_amount}</h3>
           </span>
           <span></span>
         </div>

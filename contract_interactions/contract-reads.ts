@@ -196,6 +196,28 @@ export async function userVotes(_period: any, wallet: any, _partnerId: any) {
   return votes;
 }
 
+export async function getEpochRewards() {
+  const epoch: any = await getCurrentEpochInfo();
+  const epochRewards = await client.readContract({
+    address: contracts.ve69LPFeeDistributor,
+    abi: ve69LPFeeDistributor,
+    functionName: "epochRewards",
+    args: [epoch[0]],
+  });
+
+  return epochRewards;
+}
+
+export async function getPartnerProbabilityBoost(_partnerId: any) {
+  const partnerProbabilityBoost = await client.readContract({
+    address: contracts.ve69LPPoolVoting,
+    abi: ve69LPPoolVotingABI,
+    functionName: "getPartnerProbabilityBoost",
+    args: [_partnerId],
+  });
+  return partnerProbabilityBoost;
+}
+
 //loop through index of the mapping for partenrs
 //second to last index is the id
 //the final index is how much votes they have
@@ -213,6 +235,11 @@ export async function getPartners() {
       args: [i.toString()],
     });
     console.log(current_partner);
+    const feesEarned = await getEpochRewards();
+    current_partner.push(feesEarned);
+    const probabilityBoost = await getPartnerProbabilityBoost(i.toString());
+    console.log(`probability boost: ${probabilityBoost}`);
+    current_partner.push(probabilityBoost);
     const current_partner_votes: any = await getPartnerVotes(
       period.toString(),
       i.toString()
