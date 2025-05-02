@@ -4,7 +4,6 @@ import { FaExpandAlt } from "react-icons/fa";
 import useVoting from "../../hooks/useVoting";
 import VotingModal from "./VotingModal";
 function VoteItem({ partner, votingPower, vote_amount }: any) {
-  console.log(partner);
   const { logo1, logo2, name } = dragonPools[0];
   const { setState, state } = useVoting();
   const handleModalOpen = () => {

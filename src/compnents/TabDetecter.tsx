@@ -30,8 +30,6 @@ function TabDetector({ type, balances }: any) {
 
   function Tokens({ balances }: any) {
     const notEmpty = isEmpty(balances);
-    console.log(`not empty: ${notEmpty}`);
-    console.log(balances);
     return (
       <>
         {balances !== null && notEmpty ? (

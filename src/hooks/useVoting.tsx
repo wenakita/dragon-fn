@@ -21,7 +21,6 @@ function useVoting() {
     txComplete: null,
     txMessage: null,
   });
-  console.log(state);
   // useEffect(() => {
   //
   // });
@@ -29,26 +28,23 @@ function useVoting() {
   //voting write function works now the problem was u had to add lp u dont get tokens for making the pool
 
   useEffect(() => {
-    getVotingPartners();
-    getPeriod();
+    async () => {
+      getVotingPartners();
+      getPeriod();
+    };
   }, []);
 
   useEffect(() => {
-    console.log("changed ", state.ready);
     if (state.ready && state.partnerSelection !== null) {
       initiateVote();
     }
   }, [state.ready]);
 
-  useEffect(() => {
-    console.log("slider changed");
-    console.log(amount);
-  }, [state.amount]);
+  useEffect(() => {}, [state.amount]);
 
   function setVotePercent() {}
 
   function setPartners(refreshed_partners: any) {
-    console.log(refreshed_partners);
     setState((prevState) => ({
       ...prevState,
       partners: refreshed_partners,
@@ -56,7 +52,6 @@ function useVoting() {
   }
 
   function setPeriod(period: any) {
-    console.log(period);
     setState((prevState) => ({
       ...prevState,
       period: period,

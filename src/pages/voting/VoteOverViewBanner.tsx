@@ -6,7 +6,6 @@ import VotingTopCard from "./VotingTopCard";
 function VoteOverViewBanner({ stats, state }: any) {
   const { partners } = state;
   const { votingPower, vote_amount }: any = useUserStats();
-  console.log(partners);
   return (
     <div>
       <div className="grid grid-flow-col    rounded-lg w-90 m-auto">
@@ -23,13 +22,15 @@ function VoteOverViewBanner({ stats, state }: any) {
         </div>
         <div className="mt-5 grid grid-flow-row  border w-100 md:w-150 border-[#4C5C68] rounded-lg">
           {partners
-            ? partners.map((partner: any) => {
+            ? partners.map((partner: any, key: any) => {
                 return (
-                  <VoteItem
-                    partner={partner}
-                    votingPower={votingPower}
-                    vote_amount={vote_amount}
-                  />
+                  <div key={key}>
+                    <VoteItem
+                      partner={partner}
+                      votingPower={votingPower}
+                      vote_amount={vote_amount}
+                    />
+                  </div>
                 );
               })
             : null}

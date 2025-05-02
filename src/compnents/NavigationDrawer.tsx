@@ -1,5 +1,5 @@
 import { Button, Drawer } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WalletIcon from "./icons/WalletIcon";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { FaPowerOff, FaWallet } from "react-icons/fa";
@@ -10,11 +10,16 @@ import useBalances from "../hooks/useBalances";
 function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   const { logout } = usePrivy();
   const balances = useBalances();
+  console.log(balances);
   const tokens = [];
   const [tab, setTab] = useState("tokens");
   const handleTabChange = (newValue: any) => {
     setTab(newValue);
   };
+
+  useEffect(() => {
+    console.log(balances);
+  }, [balances]);
   return (
     <div className="">
       <button

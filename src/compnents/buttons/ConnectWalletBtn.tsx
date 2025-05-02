@@ -12,7 +12,6 @@ function ConnectWalletBtn({ color }: any) {
   };
 
   function CheckElement() {
-    console.log(`is logged in? : ${isLoggedIn}`);
     if (isLoggedIn) {
       return (
         <>

@@ -20,7 +20,6 @@ export async function get_game_config() {
     abi: lotto_abi,
     functionName: "gameConfig",
   });
-  console.log(data);
 
   return {
     minEntryAmount: Number(BigInt(data[0])) / 1e18,
@@ -53,7 +52,6 @@ export async function verifyApproval(owner: string, spender: string) {
     functionName: "allowance",
     abi: LPTokenABI,
   });
-  console.log("Allowance: ", allowance);
 
   if (allowance > 0) {
     return true;
@@ -81,7 +79,6 @@ export async function getPoolBalance(
 //unlock time must be in unix format
 // Math.floor(Date.now() / 1000) timestamp format
 export async function calculateVotingPower(amount: number, unlockTime: Number) {
-  console.log(amount, unlockTime);
   try {
     const voting_power: any = await client.readContract({
       address: "0x69fA10882A252A79eE57E2a246D552BA630fd955",
@@ -89,11 +86,9 @@ export async function calculateVotingPower(amount: number, unlockTime: Number) {
       functionName: "calculateVotingPower",
       args: [amount, unlockTime],
     });
-    console.log("Voting Power:", voting_power);
 
     return voting_power;
   } catch (error) {
-    console.log(error);
     return null;
   }
 }
@@ -127,7 +122,6 @@ export async function getCurrentEpochInfo() {
     abi: ve69LPFeeDistributor,
     functionName: "getCurrentEpochInfo",
   });
-  console.log(epoch);
   //index info: 0 currentEpoch rn, 1 start time of the next epoch, 2 the time left till the next epoch
   return epoch;
 }
@@ -150,7 +144,6 @@ export async function currentPeriod() {
     functionName: "currentPeriod",
     args: [],
   });
-  console.log(`voting Period: ${current_period}`);
   return current_period;
 }
 
@@ -192,7 +185,7 @@ export async function userVotes(_period: any, wallet: any, _partnerId: any) {
     functionName: "userVotes",
     args: [_period, wallet, _partnerId],
   });
-  console.log(`Votes: ${votes}`);
+  alert(votes);
   return votes;
 }
 
@@ -225,20 +218,16 @@ export async function getPartners() {
   const partners = [];
   const length: any = await getNextPartnerId();
   const period = await currentPeriod();
-  console.log(`Next Partner: ${length}`);
   for (let i = 1; i < length; i++) {
-    console.log(`I: ${i}`);
     const current_partner: any = await client.readContract({
       address: contracts.DragonPartnerRegistry,
       abi: DragonPartnerRegistryABI,
       functionName: "getPartner",
       args: [i.toString()],
     });
-    console.log(current_partner);
     const feesEarned = await getEpochRewards();
     current_partner.push(feesEarned);
     const probabilityBoost = await getPartnerProbabilityBoost(i.toString());
-    console.log(`probability boost: ${probabilityBoost}`);
     current_partner.push(probabilityBoost);
     const current_partner_votes: any = await getPartnerVotes(
       period.toString(),
@@ -246,7 +235,6 @@ export async function getPartners() {
     );
     current_partner.push(i);
     current_partner.push(current_partner_votes);
-    console.log(current_partner);
     partners.push(current_partner);
   }
   return partners;
@@ -262,6 +250,17 @@ async function getNextPartnerId() {
   return parseInt(nextId);
 }
 
+//index 0 partner address, index 1 partner name, index 2 feeShare, index3 is active, index 4 fees earned,
+export async function getPartner(_partnerId: any) {
+  const partner = await client.readContract({
+    address: contracts.DragonPartnerRegistry,
+    abi: DragonPartnerRegistryABI,
+    functionName: "getPartner",
+    args: [_partnerId],
+  });
+  return partner;
+}
+
 async function getPartnerVotes(period: any, partnerId: string) {
   try {
     const votes = await client.readContract({
@@ -271,9 +270,7 @@ async function getPartnerVotes(period: any, partnerId: string) {
       args: [period, partnerId],
     });
     return votes;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 export async function jackpotsWon(address: string) {

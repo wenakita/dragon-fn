@@ -16,7 +16,6 @@ function Navigator() {
       setAddress(wallets[0].address as `0x${string}`);
     }
   }, [wallets]);
-  console.log(imgUrl);
   const [open, setOpen] = useState(false);
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);

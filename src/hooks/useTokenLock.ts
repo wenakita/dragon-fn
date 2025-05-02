@@ -46,7 +46,6 @@ export function useTokenLock(type: string) {
   }, [isReady]);
 
   useEffect(() => {
-    console.log(`Voting: ${lockTime}`);
     if (lockTime > 0 || tokenAmount > 0) {
       if (type == "lock") {
         getVotingPower();
@@ -55,7 +54,6 @@ export function useTokenLock(type: string) {
   }, [lockTime]);
 
   function handleTXEvent() {
-    console.log(type);
     switch (type) {
       case "lock":
         lockLP();
@@ -83,7 +81,6 @@ export function useTokenLock(type: string) {
       provider,
       account[0]
     );
-    console.log(`Status: ${lock_status.error}`);
     setLoad(false);
 
     setTxMessage(lock_status);

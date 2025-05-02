@@ -13,7 +13,6 @@ function VotingModal({
   votingPower,
   vote_amount,
 }: any) {
-  console.log(partner);
   const { logo1, logo2, name } = dragonPools[0];
   const handleModalClose = () => {
     setState((prev: any) => ({

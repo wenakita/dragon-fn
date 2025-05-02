@@ -31,8 +31,6 @@ async function stats(address: string) {
   const lp_balance = await getPoolBalance(contracts.lpToken, address);
   const formatted_balance = uintToStandard(lp_balance);
   const vote_amount = 1;
-  console.log(`Balance: ${formatted_balance}`);
-  console.log({ votingPower, tokens_locked: lock_info[0] || null });
   return {
     votingPower,
     tokens_locked: lock_info[0] || null,

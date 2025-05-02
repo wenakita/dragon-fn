@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import useBalances from "../hooks/useBalances";
 
 function NavigatorDrawerTabs({ tab, handleTabChange }: any) {
-  const { balances }: any = useBalances();
-
   useEffect(() => {
     console.log(tab);
   }, [tab]);
