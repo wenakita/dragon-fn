@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useBalances from "../hooks/useBalances";
 
 function NavigatorDrawerTabs({ tab, handleTabChange }: any) {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Button, Drawer } from "@mui/material";
+import { Button, Drawer, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import WalletIcon from "./icons/WalletIcon";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
@@ -6,17 +6,20 @@ import { FaPowerOff, FaWallet } from "react-icons/fa";
 import NavigatorDrawerTabs from "./NavigatorDrawerTabs";
 import TabDetector from "./TabDetecter";
 import useBalances from "../hooks/useBalances";
-
+import { SiGoogledocs } from "react-icons/si";
 function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   const { logout } = usePrivy();
   const balances = useBalances();
-  console.log(balances);
   const tokens = [];
   const [tab, setTab] = useState("tokens");
   const handleTabChange = (newValue: any) => {
     setTab(newValue);
   };
-
+  const CustomDrawer = styled(Drawer)(({ theme }) => ({
+    "& .MuiPaper-root": {
+      height: "80vh", // Customize height here
+    },
+  }));
   useEffect(() => {
     console.log(balances);
   }, [balances]);
@@ -55,7 +58,7 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
         </span>
       </button>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="bottom">
-        <div className="border border-[#4C5C68] bg-[#2A2B30]  p-4 ">
+        <div className="border border-[#4C5C68] bg-[#2A2B30]  p-4  ">
           <div className="flex justify-between">
             <span className="flex gap-2">
               <WalletIcon width={35} height={35} />
@@ -76,15 +79,22 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
                   <img
                     src="https://static.debank.com/image/user/official_avatar/7706/60882bcdfbe1db996c219aa56e4d5a83.png"
                     alt=""
-                    className="size-5 border rounded-md "
+                    className="size-4.5 border rounded-md "
                   />
                 </a>
 
-                <a href="https://debank.com/profile/" target="_blank">
+                <a
+                  href={
+                    wallets
+                      ? `https://sonicscan.org/address/${wallets[0].address}`
+                      : "/"
+                  }
+                  target="_blank"
+                >
                   <img
                     src="https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
                     alt=""
-                    className="size-4.5"
+                    className="size-4 mt-[1px]"
                   />
                 </a>
               </div>
@@ -104,15 +114,22 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
           <div className="p-4">
             <TabDetector type={tab} balances={balances} />
           </div>
-          <div className="mt-5">
+          <div className="mt-20">
             <button className="border w-full text-center p-2 rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
-              Lock Tokens
+              <span className="flex gap-2 justify-center">
+                <SiGoogledocs className="mt-1" />
+                <h3>Read Docs</h3>
+              </span>
             </button>
           </div>
         </div>
       </Drawer>
     </div>
   );
+}
+
+function LoadingPrompt() {
+  return <div className="text-white">spiinener</div>;
 }
 
 export default NavigationDrawer;

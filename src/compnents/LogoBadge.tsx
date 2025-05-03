@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {}
-
 function LogoBadge({ logo1, logo2, size1, size2 }: any) {
-  const {} = props;
-
   return (
     <div className="relative size-9">
       {/* Main image or content */}

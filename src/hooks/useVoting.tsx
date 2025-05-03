@@ -28,10 +28,8 @@ function useVoting() {
   //voting write function works now the problem was u had to add lp u dont get tokens for making the pool
 
   useEffect(() => {
-    async () => {
-      getVotingPartners();
-      getPeriod();
-    };
+    getVotingPartners();
+    getPeriod();
   }, []);
 
   useEffect(() => {

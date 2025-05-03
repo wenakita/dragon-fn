@@ -7,6 +7,7 @@ import NavigatorMenu from "./NavigatorMenu";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 import NavigationDrawer from "./NavigationDrawer";
 import useBalances from "../hooks/useBalances";
+import NavigationChainMenu from "./NavigationChainMenu";
 function Navigator() {
   const { balances } = useBalances();
   const { wallets } = useWallets();
@@ -25,6 +26,7 @@ function Navigator() {
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
       <div className="flex gap-3">
         <img src={imgUrl} alt="" className="w-[50px]" />
+        <NavigationChainMenu />
         <div className="hidden flex gap-3 text-white text-lg font-bold items-center">
           <h3>Dashboard</h3>
           <h3>Lock</h3>

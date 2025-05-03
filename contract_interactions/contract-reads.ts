@@ -185,7 +185,6 @@ export async function userVotes(_period: any, wallet: any, _partnerId: any) {
     functionName: "userVotes",
     args: [_period, wallet, _partnerId],
   });
-  alert(votes);
   return votes;
 }
 
