@@ -85,7 +85,7 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
 
                 <a
                   href={
-                    wallets
+                    wallets[0]
                       ? `https://sonicscan.org/address/${wallets[0].address}`
                       : "/"
                   }

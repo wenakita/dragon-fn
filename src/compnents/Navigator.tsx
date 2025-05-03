@@ -26,18 +26,22 @@ function Navigator() {
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
       <div className="flex gap-3">
         <img src={imgUrl} alt="" className="w-[50px]" />
-        <NavigationChainMenu />
-        <div className="hidden flex gap-3 text-white text-lg font-bold items-center">
+        <span className="visible md:hidden">
+          <NavigationChainMenu />
+        </span>
+        <div className="hidden md:block md:flex gap-8 text-white/90 mt-1 text-md font-semibold  items-center">
           <h3>Dashboard</h3>
           <h3>Lock</h3>
           <h3>Vote</h3>
+          <h3>Docs</h3>
         </div>
         {/* <h1 className="mt-auto mb-auto">Dragon</h1> */}
       </div>
       {/* <ConnectWalletBtn color="green-600" /> */}
-      <span className="mt-auto mb-auto flex   ">
-        <span className="visible md:hidden">{/* <NavigatorMenu /> */}</span>
-
+      <span className="mt-auto mb-auto flex  gap-3  ">
+        <span className="invisible md:visible">
+          <NavigationChainMenu />
+        </span>
         <ConnectWalletBtn />
       </span>
     </div>

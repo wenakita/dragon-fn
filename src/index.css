@@ -1,13 +1,7 @@
-/* ✅ Tailwind v4+ syntax */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  background-color: #1e1f24;
-
-
-  
+    background-color: #1e1f24;
 }
 
 /* 🐉 How Voting Works in Sonic Red Dragon (ve69LP system)
@@ -23,8 +17,7 @@ Fee distributions, boosts, and jackpots are often redirected to the pools with t
 
 ve69LP.sol, ve69LPBoost.sol, ve69LPPoolVoting.sol, etc. handle all the locking, boosting, voting, and distribution logic. */
 
-
-/* 
+/*
 new locker swap these components
 voting power card
 TESTLPLOCKMENU.tsx
@@ -36,7 +29,7 @@ useTokenLock
 TxToaster
 */
 
-/* 
+/*
 color palete
 Base Background: #1E1F24 – soft black with a bluish tint
 
