@@ -11,7 +11,34 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useChain } from "../hooks/useChain";
 import { arbitrum, base, sonic } from "viem/chains";
 export default function NavigationChainMenu() {
-  const { chain, setChain } = useChain();
+  const chains: any = {
+    arbitrum: (
+      <NetworkArbitrumOne
+        variant="background"
+        size="20"
+        className="border rounded-md border-0"
+        onClick={() => {
+          setChain(arbitrum.id);
+        }}
+      />
+    ),
+    base: (
+      <NetworkBase
+        variant="background"
+        size="20"
+        className="border rounded-md border-0"
+      />
+    ),
+    sonic: (
+      <NetworkSonic
+        variant="mono"
+        size="20"
+        color="#FFFFFF"
+        className="border border-0 rounded-md bg-orange-500"
+      />
+    ),
+  };
+  const { chain, setChain, chainLogo } = useChain();
   useEffect(() => {
     console.log(chain);
   }, [chain]);
@@ -37,7 +64,7 @@ export default function NavigationChainMenu() {
         }}
       >
         <span className="border-1 border-none mt-1 rounded-md flex gap-1 ">
-          <NetworkSonic variant="mono" size="25" color="#FFFFFF" />
+          {chains[chainLogo]}
           <IoIosArrowDown className="mt-1.5 font-bold text-white" />
         </span>
       </Button>

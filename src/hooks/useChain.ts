@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { client } from "../../config/viem_config.ts";
 import { createWalletClient, custom } from "viem";
-import { sonic } from "viem/chains";
+import { arbitrum, base, sonic } from "viem/chains";
 import { useWallets } from "@privy-io/react-auth";
-
+import { NetworkArbitrumOne } from "@web3icons/react";
 export function useChain() {
   const { wallets } = useWallets();
   const [chain, setChain] = useState(146);
-  console.log(sonic.id);
+  const [chainLogo, setChainLogo] = useState("sonic");
   useEffect(() => {
     getChain();
   }, []);
@@ -16,7 +16,6 @@ export function useChain() {
     if (wallets[0]) {
       switchChain();
     }
-    console.log(chain);
   }, [chain]);
 
   async function getChain() {
@@ -24,14 +23,31 @@ export function useChain() {
     setChain(chainId);
   }
 
+  function setLogo(chainId: any) {
+    switch (chainId) {
+      case base.id:
+        setChainLogo("base");
+        break;
+      case sonic.id:
+        setChainLogo("sonic");
+        break;
+      case arbitrum.id:
+        setChainLogo("arbitrum");
+        break;
+    }
+  }
+
   async function switchChain() {
     if (wallets[0]) {
+      setLogo(chain);
+
       const provider: any = await wallets[0].getEthereumProvider();
       const walletCLient: any = await initializeWalletClient(
         provider,
         wallets[0]
       );
       await walletCLient.switchChain({ id: chain });
+      setChain(chain);
     }
   }
 
@@ -43,5 +59,5 @@ export function useChain() {
     });
     return walletClient;
   }
-  return { chain, setChain };
+  return { chain, setChain, chainLogo };
 }

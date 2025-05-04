@@ -138,10 +138,9 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
             <TabDetector type={tab} balances={balances} />
           </div>
           <div className="md:fixed md:bottom-6 md:right-8 ">
-            <button className="border sm:w-full  md:w-[325px] text-center p-2  rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
-              <span className="flex gap-2 justify-center">
-                <SiGoogledocs className="mt-1" />
-                <h3>Read Docs</h3>
+            <button className="border sm:w-full  md:w-[325px] text-center md:p-4 p-2  rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
+              <span className="flex gap-2 justify-center text-lg font-extrabold">
+                <h3>Read Documentation</h3>
               </span>
             </button>
           </div>
