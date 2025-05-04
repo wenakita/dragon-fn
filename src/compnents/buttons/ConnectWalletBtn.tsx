@@ -7,7 +7,8 @@ function ConnectWalletBtn({ color }: any) {
   const { wallets } = useWallets();
   const isLoggedIn = useWalletStatus();
   const [open, setOpen] = useState(false);
-  const toggleDrawer = (newOpen: boolean) => () => {
+  const toggleDrawer = (newOpen: boolean) => {
+    console.log("setting");
     setOpen(newOpen);
   };
 

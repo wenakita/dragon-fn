@@ -7,6 +7,7 @@ import NavigatorDrawerTabs from "./NavigatorDrawerTabs";
 import TabDetector from "./TabDetecter";
 import useBalances from "../hooks/useBalances";
 import { SiGoogledocs } from "react-icons/si";
+import useScreenWidth from "../hooks/useScreenWidth";
 function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   const { logout } = usePrivy();
   const balances = useBalances();
@@ -15,11 +16,8 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   const handleTabChange = (newValue: any) => {
     setTab(newValue);
   };
-  const CustomDrawer = styled(Drawer)(({ theme }) => ({
-    "& .MuiPaper-root": {
-      height: "80vh", // Customize height here
-    },
-  }));
+
+  const { width, position }: any = useScreenWidth();
   useEffect(() => {
     console.log(balances);
   }, [balances]);
@@ -27,7 +25,9 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
     <div className="">
       <button
         className="mt-1.5 border border-orange-500/50 hover:animate-pulse rounded-full bg-[#2A2B30] p-[3px]"
-        onClick={toggleDrawer(true)}
+        onClick={() => {
+          toggleDrawer(true);
+        }}
       >
         <span className="flex gap-2 ">
           <svg
@@ -57,11 +57,34 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
           </h3>
         </span>
       </button>
-      <Drawer open={open} onClose={toggleDrawer(false)} anchor="bottom">
-        <div className="border border-[#4C5C68] bg-[#2A2B30]  p-4  ">
+      <Drawer
+        open={open}
+        onClose={() => toggleDrawer(false)}
+        anchor={position}
+        PaperProps={{
+          sx: {
+            width: position === "right" ? "350px" : "100%", // width for right anchor
+            height: position === "right" ? "97vh" : "auto", // smaller height for right anchor
+            marginTop: position === "right" ? "1vh" : "0",
+            marginRight: position === "right" ? "3vh" : 0,
+
+            borderRadius: position === "right" ? "10px 10px 10px 10px" : 0,
+            backgroundColor: "#2A2B30", // override background color
+          },
+        }}
+      >
+        <div className="border w-[100%] border-[#4C5C68]  bg-[#2A2B30] bmb:rounded-md  p-4 h-[100%] ">
           <div className="flex justify-between">
-            <span className="flex gap-2">
-              <WalletIcon width={35} height={35} />
+            <span className="flex gap-2 ">
+              <button
+                onClick={() => {
+                  toggleDrawer(false);
+                }}
+                className="cursor-pointer"
+              >
+                <WalletIcon width={35} height={35} />
+              </button>
+
               <h3 className="text-white font-bold text-sm mt-1.5">
                 {wallets[0] && wallets[0].address.slice(0, 6)}...
                 {wallets[0] && wallets[0].address.slice(-4)}
@@ -114,8 +137,8 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
           <div className="p-4">
             <TabDetector type={tab} balances={balances} />
           </div>
-          <div className="mt-20">
-            <button className="border w-full text-center p-2 rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
+          <div className="md:fixed md:bottom-6 md:right-8 ">
+            <button className="border sm:w-full  md:w-[325px] text-center p-2  rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
               <span className="flex gap-2 justify-center">
                 <SiGoogledocs className="mt-1" />
                 <h3>Read Docs</h3>

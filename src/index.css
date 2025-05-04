@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-sm: 480px;
+
+  --breakpoint-md: 635px;
+  --breakpoint-lg: 976px;
+}
+
 :root {
-    background-color: #1e1f24;
+  background-color: #1e1f24;
 }
 
 /* 🐉 How Voting Works in Sonic Red Dragon (ve69LP system)

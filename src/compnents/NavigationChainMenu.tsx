@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,7 +8,13 @@ import {
   NetworkSonic,
 } from "@web3icons/react";
 import { IoIosArrowDown } from "react-icons/io";
+import { useChain } from "../hooks/useChain";
+import { arbitrum, base, sonic } from "viem/chains";
 export default function NavigationChainMenu() {
+  const { chain, setChain } = useChain();
+  useEffect(() => {
+    console.log(chain);
+  }, [chain]);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,7 +54,12 @@ export default function NavigationChainMenu() {
         }}
       >
         <span className="grid grid-flow text-xs">
-          <MenuItem className="flex gap-2">
+          <MenuItem
+            className="flex gap-2"
+            onClick={() => {
+              setChain(sonic.id);
+            }}
+          >
             <NetworkSonic
               variant="mono"
               size="20"
@@ -62,10 +73,18 @@ export default function NavigationChainMenu() {
               variant="background"
               size="20"
               className="border rounded-md border-0"
+              onClick={() => {
+                setChain(arbitrum.id);
+              }}
             />
             <h3 className="text-sm">Arbitrum</h3>
           </MenuItem>
-          <MenuItem className="flex gap-2">
+          <MenuItem
+            className="flex gap-2"
+            onClick={() => {
+              setChain(base.id);
+            }}
+          >
             <NetworkBase
               variant="background"
               size="20"
