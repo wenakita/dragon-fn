@@ -26,7 +26,6 @@ function VotingModal({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "460px",
     bgcolor: "#2A2B30",
     border: "2px solid #4C5C68",
     borderRadius: "10px",
@@ -34,6 +33,7 @@ function VotingModal({
     boxShadow: 24,
     outline: "none",
     p: 3,
+    width: "100%",
   };
   return (
     <>

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @supports (font-variation-settings: normal) {
   :root {
-    font-family: InterVariable, sans-serif;
   }
 }
 @theme {
@@ -20,7 +19,7 @@
 }
 
 :root {
-  background-color: #1e1f24;
+  background-color: #18191d;
 }
 
 /* 🐉 How Voting Works in Sonic Red Dragon (ve69LP system)

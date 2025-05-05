@@ -20,7 +20,7 @@ export function useTokenLock(type: string) {
   const { wallets } = useWallets();
   const [lockTime, setLockTime] = useState(0);
   const [tokenAmount, setTokenAmount] = useState(0);
-  const [votingPower, setVotingPower] = useState();
+  const [votingPower, setVotingPower] = useState(0);
   const [isReady, setReady] = useState(false);
   const [approve, setApprove] = useState(true);
   const [wasApproved, setWasApproved] = useState(false);
@@ -51,7 +51,7 @@ export function useTokenLock(type: string) {
         getVotingPower();
       }
     }
-  }, [lockTime]);
+  }, [lockTime, tokenAmount]);
 
   function handleTXEvent() {
     switch (type) {

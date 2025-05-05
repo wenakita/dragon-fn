@@ -14,7 +14,7 @@ function VoteItem({ partner, votingPower, vote_amount }: any) {
   };
   return (
     <>
-      <div className="p-3 border  border-[#383941] bg-[#2A2B30]/70 rounded-lg">
+      <div className="p-3 border  border-[#2A2B30] bg-[#1E1F23] rounded-lg">
         <div className="flex justify-between">
           <div className="flex gap-3">
             <div className="relative size-9">

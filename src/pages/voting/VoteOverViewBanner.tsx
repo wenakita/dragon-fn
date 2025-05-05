@@ -17,7 +17,7 @@ function VoteOverViewBanner({ stats, state }: any) {
         <VotingTopCard />
         <VotingTopCard />
       </div>
-      <div className="grid grid-flow-row  mt-10  w-100 md:w-150  ms-auto me-auto">
+      <div className="grid grid-flow-row  mt-10  w-full md:w-150  ms-auto me-auto">
         <div className="">
           <h3 className="text-[32px] font-semibold">Vote</h3>
           <h3 className="text-[13px] font-semibold mt-2 whitespace-nowrap">
@@ -25,9 +25,9 @@ function VoteOverViewBanner({ stats, state }: any) {
           </h3>
         </div>
         <div
-          className={`mt-5 grid grid-flow-row ${
+          className={`mt-5 grid grid-flow-row ms-auto me-auto ${
             partners && "border border-[#4C5C68]"
-          }    w-100 md:w-150 rounded-lg`}
+          }    w-90 md:w-150 rounded-lg`}
         >
           {partners ? (
             partners.map((partner: any, key: any) => {

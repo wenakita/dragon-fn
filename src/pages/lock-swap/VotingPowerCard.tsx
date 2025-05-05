@@ -9,7 +9,7 @@ function VotingPowerCard() {
     <Card
       variant="outlined"
       className="  w-50 p-3"
-      sx={{ backgroundColor: "#2A2B30", borderColor: "#4C5C68" }}
+      sx={{ backgroundColor: "#1E1F23", borderColor: "#4C5C68" }}
     >
       <span className="text-md font-bold" style={{ color: "#F4F4F5" }}>
         <span className="flex justify-between gap-2">

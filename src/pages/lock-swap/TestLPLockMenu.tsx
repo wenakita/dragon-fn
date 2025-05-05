@@ -7,16 +7,16 @@ import LockSwapModal from "./LockSwapModal";
 import imgUrl from "../../assets/3dDragon.png";
 function TestLPLockMenu() {
   return (
-    <div className=" container p-3 m-auto ">
-      <div className="max-w-150 m-auto ">
-        <div className="p-3">
+    <div className=" container p-3 ms-auto me-auto ">
+      <div className="max-w-150   grid md:grid-flow-col md:gap-3">
+        <div className="p-3 visible md:invisible">
           <VotingPowerCard />
         </div>
-        <div className="mt-4 ">
+        <div className="mt-4 flex  justify-center">
           <LockSwapTabs />
         </div>
-        <div className="xxs:hidden relative left-120 bottom-90">
-          <img src={imgUrl} alt="" />
+        <div className="invisible md:visible mt-20">
+          <VotingPowerCard />
         </div>
       </div>
     </div>

@@ -16,7 +16,6 @@ function LPPairsModal({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 430,
     bgcolor: "#2A2B30",
     border: "2px solid #4C5C68",
     borderRadius: "10px",
@@ -24,6 +23,7 @@ function LPPairsModal({
     boxShadow: 24,
     outline: "none",
     p: 3,
+    width: "100%",
   };
   return (
     <>
