@@ -42,7 +42,7 @@ function Navigator() {
         <span className="invisible md:visible  ">
           <NavigationChainMenu />
         </span>
-        <span className="visible md:invisible">
+        <span className="visible md:hidden">
           <NavigatorMenu />
         </span>
         <ConnectWalletBtn />
