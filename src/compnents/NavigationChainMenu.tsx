@@ -63,9 +63,9 @@ export default function NavigationChainMenu() {
           color: "black",
         }}
       >
-        <span className="border-1 border-none mt-1 rounded-md flex gap-1 ">
+        <span className="border-1 border-none mt-1.5 rounded-md flex gap-1 ">
           {chains[chainLogo]}
-          <IoIosArrowDown className="mt-1.5 font-bold text-white" />
+          <IoIosArrowDown className="mt-1 font-extrabold text-white/70" />
         </span>
       </Button>
       <Menu

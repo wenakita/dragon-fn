@@ -29,7 +29,7 @@ function FooterContent() {
         </div>
         <div className="text-white/60 ms-12 mt-2 font-bold">@2025 Dragon</div>
       </div>
-      <div className="grid grid-cols-2 gap-10 p-5 ">
+      <div className="grid grid-cols-2 lg:grid-flow-col gap-10 p-5 ">
         <div className=" ">
           <h1 className="font-bold text-lg">Community</h1>
           <div className="text-md text-white/70 mt-1 ">

@@ -50,7 +50,7 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
               />
             </g>
           </svg>
-          <h3 className="text-sm m-auto font-semibold p-0.5">
+          <h3 className="hidden md:block text-sm m-auto font-semibold p-0.5">
             {wallets[0] && wallets[0].address.slice(0, 6)}
             {"..."}
             {wallets[0] && wallets[0].address.slice(-4)}
@@ -85,7 +85,7 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
                 <WalletIcon width={35} height={35} />
               </button>
 
-              <h3 className="text-white font-bold text-sm mt-1.5">
+              <h3 className=" text-white font-bold text-sm mt-1.5 ">
                 {wallets[0] && wallets[0].address.slice(0, 6)}...
                 {wallets[0] && wallets[0].address.slice(-4)}
               </h3>
