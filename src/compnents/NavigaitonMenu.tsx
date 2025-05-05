@@ -7,6 +7,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { FaGithub, FaLock, FaTelegramPlane, FaVoteYea } from "react-icons/fa";
 import { Divider } from "@mui/material";
 import { FaX } from "react-icons/fa6";
+import { Link } from "react-router";
 
 export default function NavigaitonMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -43,17 +44,23 @@ export default function NavigaitonMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <span className="flex gap-2">
+          <Link
+            to={"/lock"}
+            className="flex gap-2 text-white/90 hover: hover:text-white/70"
+          >
             <FaLock className="mt-1.5 text-xs" />
 
-            <h3 className="font-bold text-sm text-white/90 mt-0.5">Lock</h3>
-          </span>
+            <h3 className="font-bold text-sm  mt-0.5">Lock</h3>
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <span className="flex gap-2">
+          <Link
+            to={"/vote"}
+            className="flex gap-2 text-white/90 hover: hover:text-white/70"
+          >
             <FaVoteYea className="mt-1 text-sm" />
-            <h3 className="font-bold text-sm text-white/90 mt-0.5">Vote</h3>
-          </span>
+            <h3 className="font-bold text-sm  mt-0.5">Vote</h3>
+          </Link>
         </MenuItem>
         <Divider
           sx={{
@@ -63,23 +70,49 @@ export default function NavigaitonMenu() {
           }}
         />
         <MenuItem onClick={handleClose}>
-          <span className="flex gap-2 text-white/70 text-xs font-bold">
+          <a
+            href={"https://t.me/SonicRedDragon"}
+            target="_blank"
+            className="flex gap-2 text-white/70 hover:text-white/40 text-xs font-bold"
+          >
             <h3>Community</h3>
             <MdArrowOutward className="mt-0.5" />
-          </span>
+          </a>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <span className="flex gap-2 text-white/70 text-xs font-bold">
+          <a
+            href="https://github.com/wenakita/RedDragon"
+            target="_blank"
+            className="flex gap-2 text-white/70  hover:text-white/40 text-xs font-bold"
+          >
             <h3>Documentation</h3>
             <MdArrowOutward className="mt-0.5" />
-          </span>
+          </a>
         </MenuItem>
 
         <MenuItem onClick={handleClose}>
-          <span className="flex gap-3 text-xs text-white/70">
-            <FaX />
-            <FaTelegramPlane />
-            <FaGithub />
+          <span className="flex gap-3 text-xs ">
+            <a
+              href={"https://t.me/SonicRedDragon"}
+              target="_blank"
+              className="text-white/70 hover:text-white/40"
+            >
+              <FaX />
+            </a>
+            <a
+              href={"https://t.me/SonicRedDragon"}
+              target="_blank"
+              className="text-white/70 hover:text-white/40"
+            >
+              <FaTelegramPlane />
+            </a>
+            <a
+              href="https://github.com/wenakita/RedDragon"
+              target="_blank"
+              className="text-white/70 hover:text-white/40"
+            >
+              <FaGithub />
+            </a>
           </span>
         </MenuItem>
       </Menu>

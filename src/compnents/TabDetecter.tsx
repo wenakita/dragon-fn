@@ -42,7 +42,9 @@ function TabDetector({ type, balances }: any) {
               <span key={key}>
                 <DrawerItem
                   src1={"/src/assets/logo_new.png"}
-                  src2={token.logo}
+                  src2={
+                    "https://raw.githubusercontent.com/balancer/tokenlists/main/src/assets/images/tokens/0x039e2fb66102314ce7b64ce5ce3e5183bc94ad38.png"
+                  }
                   name={token.name}
                   balance={Math.floor(token.balance)}
                   surname={token.surname}

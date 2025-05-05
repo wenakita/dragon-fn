@@ -1,5 +1,9 @@
 @import "tailwindcss";
-
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
 @theme {
   --breakpoint-sm: 480px;
   --breakpoint-md: 633px;

@@ -24,12 +24,16 @@ function Navigator() {
 
   return (
     <div className="border border-[#4C5C68] border-t-0 border-l-0 border-r-0 rounded-md  p-2.5 text-white flex justify-between">
-      <div className="flex gap-3">
-        <img src={imgUrl} alt="" className="w-[50px]" />
+      <div className="flex gap-3 md:gap-8">
+        <img
+          src={"src/assets/outline.png"}
+          alt=""
+          className="size-9 mt-auto mb-auto"
+        />
         <span className="visible md:hidden ">
           <NavigationChainMenu />
         </span>
-        <div className="hidden md:block md:flex gap-8 text-white/80 mt-1 text-sm font-bold  items-center">
+        <div className="hidden md:block md:flex gap-8 text-white/80 mt-1 text-sm font-semibold  items-center">
           <h3>Dashboard</h3>
           <h3>Lock</h3>
           <h3>Vote</h3>
