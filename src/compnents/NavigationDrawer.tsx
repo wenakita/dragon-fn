@@ -18,9 +18,7 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
   };
 
   const { width, position }: any = useScreenWidth();
-  useEffect(() => {
-    console.log(balances);
-  }, [balances]);
+
   return (
     <div className="">
       <button
@@ -64,11 +62,14 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
         PaperProps={{
           sx: {
             width: position === "right" ? "350px" : "100%", // width for right anchor
-            height: position === "right" ? "97vh" : "auto", // smaller height for right anchor
+            height: position === "right" ? "97vh" : "50vh", // smaller height for right anchor
             marginTop: position === "right" ? "1vh" : "0",
             marginRight: position === "right" ? "3vh" : 0,
 
-            borderRadius: position === "right" ? "10px 10px 10px 10px" : 0,
+            borderRadius:
+              position === "right"
+                ? "10px 10px 10px 10px"
+                : "10px 10px 10px 10px",
             backgroundColor: "#2A2B30", // override background color
           },
         }}
@@ -137,9 +138,9 @@ function NavigationDrawer({ open, setOpen, toggleDrawer, wallets }: any) {
           <div className="p-4">
             <TabDetector type={tab} balances={balances} />
           </div>
-          <div className="md:fixed md:bottom-6 md:right-8 ">
-            <button className="border sm:w-full  md:w-[325px] text-center md:p-4 p-2  rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
-              <span className="flex gap-2 justify-center text-lg font-extrabold">
+          <div className="fixed bottom-3 w md:bottom-6 md:right-8 ">
+            <button className="border sm:w-[475px]  md:w-[325px] text-center md:p-4 p-2  rounded-lg text-white font-bold bg-[#FF6B00] border-[#FF6B00]">
+              <span className="flex gap-2 justify-center md:text-xl text-lg font-extrabold">
                 <h3>Read Documentation</h3>
               </span>
             </button>

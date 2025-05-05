@@ -4,6 +4,15 @@
   --breakpoint-sm: 480px;
   --breakpoint-md: 633px;
   --breakpoint-lg: 976px;
+  --fadein: fadeIn 0.5s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 :root {

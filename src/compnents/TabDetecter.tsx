@@ -1,11 +1,9 @@
-import { FaWallet } from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaTruckLoading, FaWallet } from "react-icons/fa";
 import { LuWaves } from "react-icons/lu";
 function TabDetector({ type, balances }: any) {
   console.log(balances);
   function DetectElement({ type, balances }: any) {
-    if (!balances) {
-      return <Loading />;
-    }
     switch (type) {
       case "tokens":
         return <Tokens balances={balances} />;
@@ -36,7 +34,10 @@ function TabDetector({ type, balances }: any) {
     return (
       <>
         {balances.tokens && Object.keys(balances.tokens).length > 0 ? (
-          <div className="grid grid-flow-row gap-3">
+          <div
+            className="grid grid-flow-row gap-3"
+            style={{ animation: "var(--fadein)" }}
+          >
             {Object.entries(balances.tokens).map(([key, token]: any) => (
               <span key={key}>
                 <DrawerItem
@@ -57,7 +58,10 @@ function TabDetector({ type, balances }: any) {
     return (
       <>
         {balances.lockInfo ? (
-          <div className="flex justify-between">
+          <div
+            className="flex justify-between"
+            style={{ animation: "var(--fadein)" }}
+          >
             <span className="flex gap-4">
               <div className="relative size-9">
                 {/* Main image or content */}
@@ -87,7 +91,10 @@ function TabDetector({ type, balances }: any) {
             </span>
           </div>
         ) : (
-          <div className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc">
+          <div
+            className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc"
+            style={{ animation: "var(--fadein)" }}
+          >
             <span>
               <FaWallet className="text-[50px] text-white/50 m-auto" />
               <h3 className="font-bold mt-3">No Locks Yet</h3>
@@ -105,7 +112,10 @@ function TabDetector({ type, balances }: any) {
     return (
       <>
         {balances.votes ? (
-          <div className="grid grid-flow-row gap-2">
+          <div
+            className="grid grid-flow-row gap-2"
+            style={{ animation: "var(--fadein)" }}
+          >
             {balances.votes.map((vote: any, key: any) => {
               console.log(vote);
               return (
@@ -136,11 +146,14 @@ function TabDetector({ type, balances }: any) {
       </>
     );
   }
-  function Pools({ balances }) {
+  function Pools({ balances }: any) {
     return (
       <>
         {balances.pools ? (
-          <div className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc">
+          <div
+            className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc"
+            style={{ animation: "var(--fadein)" }}
+          >
             <span>
               <LuWaves className="text-[50px] text-white/50 m-auto" />
               <h3 className="font-bold mt-3">No Pools Yet</h3>
@@ -150,7 +163,10 @@ function TabDetector({ type, balances }: any) {
             </span>
           </div>
         ) : (
-          <div className="mt-5 p-10 text-center text-white text-sm drawer-content-goes-here-tokens-etc">
+          <div
+            className="mt-5 p-5 text-center text-white text-sm drawer-content-goes-here-tokens-etc"
+            style={{ animation: "var(--fadein)" }}
+          >
             <span>
               <LuWaves className="text-[50px] text-white/50 m-auto" />
               <h3 className="font-bold mt-3">No Pools Yet</h3>
@@ -205,12 +221,29 @@ function TabDetector({ type, balances }: any) {
         </div>
         <div className="text-white grid grid-rows-2">
           <h3 className="text-sm">{balance}</h3>
+          <h3 className="text-sm text-end">$0.00</h3>
         </div>
       </div>
     );
   }
 
-  return <>{balances && <DetectElement type={type} balances={balances} />}</>;
+  function Loading() {
+    return (
+      <div className="text-white/70 font-bold text-[40px] mt-14 flex justify-center ">
+        <AiOutlineLoading3Quarters className="animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {balances ? (
+        <DetectElement type={type} balances={balances} />
+      ) : (
+        <Loading />
+      )}
+    </>
+  );
 }
 
 export default TabDetector;

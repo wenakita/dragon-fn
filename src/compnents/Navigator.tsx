@@ -9,7 +9,7 @@ import NavigationDrawer from "./NavigationDrawer";
 import useBalances from "../hooks/useBalances";
 import NavigationChainMenu from "./NavigationChainMenu";
 function Navigator() {
-  const { balances } = useBalances();
+  const balances = useBalances();
   const { wallets } = useWallets();
   const [address, setAddress] = useState<any | null>(null);
   useEffect(() => {

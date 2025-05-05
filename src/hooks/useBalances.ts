@@ -20,7 +20,7 @@ function useBalances() {
   const { wallets } = useWallets();
   const isLoggedIn: any = useAuthentication();
   const { state } = useVoting();
-  const [balances, setBalances] = useState<any | null>({});
+  const [balances, setBalances] = useState<any | null>(null);
 
   useEffect(() => {
     if (wallets[0]) {
@@ -51,8 +51,8 @@ function useBalances() {
           {
             balance: dragon,
             logo: "/src/assets/logo_new.png",
-            name: "dragon",
-            surname: "dragon",
+            name: "Dragon",
+            surname: "DRAGON",
           },
           {
             balance: lp,
