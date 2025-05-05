@@ -2,7 +2,7 @@ import "./App.css";
 import { usePrivy } from "@privy-io/react-auth";
 import { useWallets } from "@privy-io/react-auth";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home.tsx";
 import Layout from "./compnents/Layout";
 import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
