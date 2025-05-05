@@ -34,10 +34,12 @@ function Navigator() {
           <NavigationChainMenu />
         </span>
         <div className="hidden md:block md:flex gap-8 text-white/80 mt-1 text-sm font-semibold  items-center">
-          <h3>Dashboard</h3>
           <h3>Lock</h3>
           <h3>Vote</h3>
           <h3>Docs</h3>
+          <h3>Community</h3>
+
+          <NavigatorMenu />
         </div>
         {/* <h1 className="mt-auto mb-auto">Dragon</h1> */}
       </div>

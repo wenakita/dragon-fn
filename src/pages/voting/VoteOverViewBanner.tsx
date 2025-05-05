@@ -9,10 +9,13 @@ function VoteOverViewBanner({ stats, state }: any) {
   const { votingPower, vote_amount }: any = useUserStats();
   return (
     <div>
-      <div className="grid grid-flow-col    rounded-lg w-90 m-auto">
+      <div className="visible md:hidden  rounded-lg  w-90  m-auto">
         <VotingTopCard />
-        {/* <div className="border xxs:hidden">hello</div>
-      <div className="border">hello</div> */}
+      </div>
+      <div className="hidden md:block md:grid md:grid-cols-3 md:gap-3 lg:gap-25 md:p-10  rounded-lg  md:w-full  md:gap-3 m-auto">
+        <VotingTopCard />
+        <VotingTopCard />
+        <VotingTopCard />
       </div>
       <div className="grid grid-flow-row  mt-10  w-100 md:w-150  ms-auto me-auto">
         <div className="">
