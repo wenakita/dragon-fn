@@ -2,6 +2,7 @@ import React from "react";
 import { useUserStats } from "../../hooks/useUserStats";
 import VoteItem from "./VoteItem";
 import VotingTopCard from "./VotingTopCard";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 // all these will be in a sepoerate component
 function VoteOverViewBanner({ stats, state }: any) {
   const { partners } = state;
@@ -20,22 +21,36 @@ function VoteOverViewBanner({ stats, state }: any) {
             Vote for a partner to receive probability boost!
           </h3>
         </div>
-        <div className="mt-5 grid grid-flow-row  border w-100 md:w-150 border-[#4C5C68] rounded-lg">
-          {partners
-            ? partners.map((partner: any, key: any) => {
-                return (
-                  <div key={key}>
-                    <VoteItem
-                      partner={partner}
-                      votingPower={votingPower}
-                      vote_amount={vote_amount}
-                    />
-                  </div>
-                );
-              })
-            : null}
+        <div
+          className={`mt-5 grid grid-flow-row ${
+            partners && "border border-[#4C5C68]"
+          }    w-100 md:w-150 rounded-lg`}
+        >
+          {partners ? (
+            partners.map((partner: any, key: any) => {
+              return (
+                <div key={key}>
+                  <VoteItem
+                    partner={partner}
+                    votingPower={votingPower}
+                    vote_amount={vote_amount}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function Loading() {
+  return (
+    <div className="text-white/70 font-bold text-[40px] mt-14 flex justify-center ">
+      <AiOutlineLoading3Quarters className="animate-spin" />
     </div>
   );
 }
