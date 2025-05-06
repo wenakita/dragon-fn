@@ -51,9 +51,10 @@ function LockSwapModal({ type }: any) {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
-    <div className="">
-      <div className="text-white sm:w-[95%] md:w-[100%] p-5 ms-auto me-auto border border-[#2A2B30] bg-[#1E1F23] rounded-md">
+    <div className="flex justify-center">
+      <div className="text-white sm:w-[95%] md:w-[100%] p-5 border border-[#2A2B30] bg-[#1E1F23] rounded-md">
         <h1 className="title text-2xl font-bold">
           {lockswapContent[type].title}{" "}
         </h1>
@@ -85,7 +86,9 @@ function LockSwapModal({ type }: any) {
                     />
                   </div>
                 </div>
-                <h3 className="mt-2 text-sm font-bold">Dragon LP</h3>
+                <h3 className="mt-2 text-sm font-bold">
+                  {poolSelected ? poolSelected : "Dragon"}
+                </h3>
               </button>
               <span className="border border-[#28292e] p-1.5 grid grid-flow-row text-xs">
                 <input

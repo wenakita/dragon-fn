@@ -6,7 +6,6 @@ import Home from "./pages/Home/Home.tsx";
 import Layout from "./compnents/Layout";
 import { get_game_config } from "../contract_interactions/contract-reads";
 import { useEffect } from "react";
-import LockLP from "./pages/LockLP";
 import Dashboard from "./pages/user-dashboard/Dashboard";
 import VoteMain from "./pages/voting/VoteMain";
 import TestLPLockMenu from "./pages/lock-swap/TestLPLockMenu";
@@ -27,7 +26,6 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/sandbox" element={<LockLP />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vote" element={<VoteMain />} />
             <Route path="/lock" element={<TestLPLockMenu />} />

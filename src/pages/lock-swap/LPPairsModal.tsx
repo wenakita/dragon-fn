@@ -1,9 +1,10 @@
 import { Box, Button, colors, Divider, Modal, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { dragonPools } from "../../../config/dragonPools";
 import PoolPairItem from "./PoolPairItem";
+import { assert } from "console";
 function LPPairsModal({
   open,
   setOpen,
@@ -59,17 +60,20 @@ function LPPairsModal({
           </span>
           <span className="">
             <span className="grid grid-flow-row mt-5 h-100 overflow-y-auto gap-1.5">
-              {dragonPools.map((pool, key) => {
-                return (
-                  <PoolPairItem pool={pool} setPoolSelected={setPoolSelected} />
-                );
-              })}
+              {getPools(setPoolSelected)}
             </span>
           </span>
         </Box>
       </Modal>
     </>
   );
+}
+
+function getPools({ setPoolSelected }: any) {
+  const pools = dragonPools.map((pool, key) => {
+    return <PoolPairItem pool={pool} setPoolSelected={setPoolSelected} />;
+  });
+  return pools;
 }
 
 export default LPPairsModal;
