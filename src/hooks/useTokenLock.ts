@@ -46,8 +46,11 @@ export function useTokenLock(type: string) {
   }, [isReady]);
 
   useEffect(() => {
-    if (lockTime > 0 || tokenAmount > 0) {
+    console.log(tokenAmount, lockTime);
+    if (lockTime > 0 && tokenAmount > 0) {
       if (type == "lock") {
+        console.log(lockTime);
+
         getVotingPower();
       }
     }
@@ -55,14 +58,14 @@ export function useTokenLock(type: string) {
 
   function handleTXEvent() {
     switch (type) {
-      case "lock":
+      case "Lock":
         lockLP();
         break;
 
-      case "increase":
+      case "Increase":
         increaseLock();
         break;
-      case "extend":
+      case "Extend":
         extendTime();
         break;
     }
@@ -148,6 +151,7 @@ export function useTokenLock(type: string) {
   async function getVotingPower() {
     const unix_time = numericToUnix(lockTime);
     const power = await calculateVotingPower(tokenAmount, unix_time);
+    console.log("power", power);
     setVotingPower(power);
   }
 

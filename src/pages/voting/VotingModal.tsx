@@ -26,7 +26,7 @@ function VotingModal({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    bgcolor: "#2A2B30",
+    bgcolor: "#1E1F23",
     border: "2px solid #4C5C68",
     borderRadius: "10px",
     color: "#F4F4F5",
@@ -93,7 +93,7 @@ function VotingModal({
             <div>
               <h3 className="text-2xl font-bold mt-5">Summary</h3>
 
-              <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#2A2B30]  text-white/70">
+              <div className="grid grid-flow-row mt-4 text-sm font-bold border rounded-md border-[#4C5C68] bg-[#1E1F23]  text-white/70">
                 <span className="border-dashed  border-[#4C5C68]  flex justify-between p-2">
                   <h3>Fees Earned</h3>
                   <h3>{partner[partner.length - 4]}</h3>

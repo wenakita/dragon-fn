@@ -45,6 +45,14 @@ function verifyBalance(
 ) {}
 ///
 
+export async function checkLock(_wallet: any) {
+  const lockInfo = await getlock(_wallet);
+}
+
+async function compareDates(lockinfo: any) {
+  return null;
+}
+
 export async function verifyApproval(owner: string, spender: string) {
   const allowance: any = await client.readContract({
     address: contracts.lpToken,

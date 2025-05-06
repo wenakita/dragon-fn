@@ -5,7 +5,7 @@ interface Props {}
 
 function VotingSlider({ partner, state, setState }: any) {
   return (
-    <div className=" border border-[#4C5C68] bg-[#2A2B30]  rounded-lg grid-flow-row p-3">
+    <div className=" border border-[#4C5C68] bg-[#1E1F23]  rounded-lg grid-flow-row p-3">
       <h3 className="text-xs font-extrabold text-white/60">Vote</h3>
       <span className="flex gap-2">
         <h3 className="text-xl font-extrabold mt-2">{partner && partner[1]}</h3>
