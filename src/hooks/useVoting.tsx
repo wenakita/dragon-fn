@@ -18,7 +18,7 @@ function useVoting() {
     votePercent: null,
     amount: 0,
     partnerSelection: null,
-    txComplete: null,
+    txComplete: false,
     txMessage: null,
   });
   // useEffect(() => {

@@ -1,4 +1,4 @@
-function WalletIcon({ width, height }) {
+function WalletIcon({ width, height }: { width: number | string; height: number | string }) {
   return (
     <svg
       height={height}

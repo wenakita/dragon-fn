@@ -1,6 +1,8 @@
+import React from "react";
+// import LockList from "./LockList"; // Component not found
 import { CiLock } from "react-icons/ci";
-import LockList from "./LockList";
 import { FiCheck } from "react-icons/fi";
+import { FaLock } from "react-icons/fa";
 
 function LockSwapInstructions({
   setReady,
@@ -12,7 +14,7 @@ function LockSwapInstructions({
     <div className="">
       <h3 className="mb-5 font-semibold p-3">Locking LP Tokens</h3>
       <span className="">
-        <LockList />
+        {/* <LockList /> */}
       </span>
       <span className="flex gap-2">
         <button
